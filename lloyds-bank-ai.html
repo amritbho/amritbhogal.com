@@ -6,7 +6,6 @@
 <title>AI Call Assist — Amrit Singh Bhogal</title>
 <meta name="description" content="AI note-taking for Lloyds call handlers, designed to cut manual work and speed up every call.">
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="ready-pages" content="sensori lloyds-bank-ai prepu bp-castrol bp-core lbg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
@@ -427,8 +426,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   window.addEventListener('load', toTop);
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var readyMeta = document.querySelector('meta[name="ready-pages"]');
-  var READY = readyMeta ? readyMeta.content.split(' ') : ['all'];
 
   // Header tucks away while scrolling down, returns on scroll up
   var header = document.querySelector('.site-header');
@@ -473,17 +470,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
         t.finished.then(function () { rows.forEach(function (r) { r.style.viewTransitionName = ''; }); });
       } else apply();
     });
-  });
-
-  // Case studies not rebuilt yet in this round
-  document.querySelectorAll('.project a, a.next').forEach(function (a) {
-    var slug = a.getAttribute('href').replace('.html', '');
-    if (READY.length && READY[0] !== 'all' && READY.indexOf(slug) === -1) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        say('This case study is next in line for the redesign. BP Castrol is ready to view.');
-      });
-    }
   });
 
   // Hover preview that trails the cursor
