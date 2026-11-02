@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Nunito:wght@700&family=Caveat:wght@500&display=swap">
 <style>/* Layout: one wide left-aligned column; the project index is the page's single bold element, and each project owns a signature colour carried over from the original tiles. */
 :root {
   --paper: #fbfbfc;
@@ -309,6 +310,137 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
+
+/* ---------- Story sections (Sensori) ---------- */
+.chapter h3.sub { margin: 44px 0 14px; font: 600 21px/1.3 var(--body); letter-spacing: -.01em; }
+.chapter h3.sub:first-of-type { margin-top: 28px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 28px 0 20px; }
+.cards.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card { background: var(--raised); border: 1px solid var(--line); border-radius: 6px; padding: 22px 24px; }
+.card h4 { margin: 0 0 8px; font: 600 17px/1.3 var(--body); }
+.card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.sw { display: grid; gap: 3px; font-size: 14px; }
+.sw .chip-c { aspect-ratio: 4 / 3; border-radius: 6px; border: 1px solid var(--line); margin-bottom: 8px; }
+.sw code { font: 500 13px/1.3 ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); }
+.sw span:last-child { color: var(--muted); font-size: 13px; line-height: 1.4; }
+.specs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.spec { display: grid; gap: 4px; border-top: 1px solid var(--ink); padding-top: 16px; font-size: 14px; }
+.spec .spec-s { font-size: clamp(26px, 2.4vw, 34px); line-height: 1.15; margin-bottom: 14px; text-wrap: balance; }
+.spec span:last-child { color: var(--muted); }
+.bands { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.bands figure { margin: 0; }
+.bands img { width: 100%; aspect-ratio: 1; object-fit: contain; padding: 6%; background: var(--raised); border: 1px solid var(--line); border-radius: 6px; }
+.bands figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); text-align: center; }
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+.rule { border-radius: 6px; padding: 20px 24px; border: 1px solid var(--line); }
+.rule.yes { background: color-mix(in srgb, #2a9f45 9%, var(--raised)); }
+.rule.no { background: color-mix(in srgb, #b4532a 8%, var(--raised)); }
+.rule h4 { margin: 0 0 10px; font: 600 15px/1.3 var(--body); }
+.rule ul { list-style: none; margin: 0; padding: 0; }
+.rule li { padding: 9px 0; border-top: 1px solid var(--line); font-size: 16px; }
+.rule.no li { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+.media.phones.four figcaption { background: transparent; text-align: center; }
+@media (max-width: 900px) {
+  .cards, .cards.n3 { grid-template-columns: minmax(0, 1fr); }
+  .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .specs { grid-template-columns: minmax(0, 1fr); }
+  .bands { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rules { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .card, .sw, .spec, .bands figure, .rule { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 50%; }
+  }
+}
+
+.stats + p, .stats + h3.sub { margin-top: 36px; }
+.cards + p { margin-top: 8px; }
+
+/* ---------- Compact Sensori story ---------- */
+.principles { margin-top: 28px; }
+.principles > p { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.principles ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.principles li { display: grid; gap: 4px; border-top: 2px solid var(--c); padding-top: 12px; }
+.principles b { font-size: 17px; }
+.principles span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+.brandrow { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 40px; margin-top: 8px; }
+.br-col h4 { margin: 0 0 14px; font: 600 14px/1.2 var(--body); color: var(--muted); }
+.br-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.dots li { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+.dots .dot { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); flex: none; }
+.dots code { margin-left: auto; font: 500 12px/1 ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); }
+.types li { display: grid; grid-template-columns: 64px auto 1fr; align-items: baseline; gap: 10px; }
+.types .aa { font-size: 40px; line-height: 1; }
+.types li > span:last-child { color: var(--muted); font-size: 14px; }
+.br-col .say, .br-col .never { margin: 0 0 6px; font: 600 22px/1.3 var(--body); }
+.br-col .never { color: var(--muted); font-weight: 400; text-decoration: line-through; text-decoration-thickness: 1px; }
+.br-col .voice { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+.marquee { margin-top: 40px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 16px; width: max-content; }
+.marquee li { flex: none; width: 168px; text-align: center; font-size: 14px; color: var(--muted); }
+.marquee img { width: 168px; aspect-ratio: 1; object-fit: contain; padding: 8%; margin-bottom: 8px; background: var(--raised); border: 1px solid var(--line); border-radius: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .marquee ul { animation: marquee 38s linear infinite; }
+  .marquee:hover ul { animation-play-state: paused; }
+}
+@media (prefers-reduced-motion: reduce) { .marquee { overflow-x: auto; } }
+@keyframes marquee { to { transform: translateX(calc(-50% - 8px)); } }
+
+.strip-wrap { margin-top: 28px; }
+.strip { display: grid; grid-auto-flow: column; grid-auto-columns: 210px; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; cursor: grab; scrollbar-width: thin; }
+.strip.dragging { cursor: grabbing; scroll-snap-type: none; }
+.strip figure { margin: 0; scroll-snap-align: start; }
+.strip img { width: 100%; pointer-events: auto; -webkit-user-drag: none; user-select: none; }
+.strip figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); }
+.strip figcaption code { font: 500 12px/1 ui-monospace, "SF Mono", Menlo, monospace; color: var(--ink); margin-right: 4px; }
+.hint { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+
+.aisteps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; counter-reset: ai; }
+.aisteps li { display: grid; gap: 6px; border-top: 2px solid var(--c); padding-top: 14px; counter-increment: ai; }
+.aisteps li::before { content: counter(ai); font: 700 13px/1 var(--body); color: var(--muted); font-variant-numeric: tabular-nums; }
+.aisteps b { font-size: 18px; }
+.aisteps span { color: var(--muted); font-size: 15px; line-height: 1.55; }
+.chapter .note { margin: 24px 0 0; color: var(--muted); font-size: 15px; }
+
+#app.chapter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 40px; align-items: start; }
+#app.chapter > h2 { grid-column: 1 / -1; margin-bottom: 24px; }
+.compare-wrap { max-width: 300px; justify-self: center; width: 100%; }
+.compare { position: relative; border-radius: 34px; overflow: hidden; touch-action: pan-y; }
+.compare > img { width: 100%; display: block; }
+.cmp-top { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.cmp-top img { width: 100%; height: 100%; display: block; }
+.cmp-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--c); pointer-events: none; }
+.cmp-line::after { content: ""; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: var(--c); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.compare:has(input:focus-visible) { outline: 2px solid var(--signal); outline-offset: 4px; }
+.cmp-labels { display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px; color: var(--muted); }
+.viewer { display: grid; gap: 16px; max-width: 360px; justify-self: center; width: 100%; }
+.v-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.v-tabs button { font: 500 14px/1 var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.v-tabs button:hover { color: var(--ink); border-color: var(--ink); }
+.v-tabs button[aria-selected="true"] { background: var(--c); border-color: var(--c); color: var(--fg); }
+.v-caps p { display: none; margin: 0; font-size: 15px; color: var(--muted); min-height: 3em; }
+.v-caps p.on { display: block; animation: fade-up .45s cubic-bezier(.2, .7, .2, 1) both; }
+.v-phone { position: relative; aspect-ratio: 600 / 1261; max-width: 300px; }
+.v-phone img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transform: translateY(12px) scale(.98); transition: opacity .45s ease, transform .55s cubic-bezier(.2, .7, .2, 1); }
+.v-phone img.on { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .principles ul, .brandrow, .aisteps { grid-template-columns: minmax(0, 1fr); }
+  .aisteps { gap: 18px; }
+  #app.chapter { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .strip { margin-right: calc(-1 * max(var(--gutter), env(safe-area-inset-right, 0px))); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .principles li, .aisteps li, .br-col, .strip figure { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 45%; }
+  }
+}
+.v-phone { width: 100%; justify-self: center; }
+.v-caps { margin-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -333,77 +465,66 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       <div><dt>Role</dt><dd>Co-founder</dd></div>
       <div><dt>Stage</dt><dd>Pre-launch</dd></div>
       <div><dt>Product</dt><dd>Wristband and parent app</dd></div>
-      <div><dt>Scope</dt><dd>Brand, website and app</dd></div>
+      <div><dt>Scope</dt><dd>Research, brand, website and app</dd></div>
     </dl>
   </section>
 
   <div class="case-hero"><img src="images/sensori-band.jpg" width="2000" height="800" alt="Three Sensori app screens: Emotions, Home and Sleep"></div>
 
-  <section class="goal wrap" aria-label="The mission">
-    <blockquote>Help every parent understand their child, with care and without judgement.</blockquote>
-    <p>The mission</p>
+  <section class="goal wrap" aria-label="Our mission">
+    <blockquote>To help every parent understand their child a little better each day. Not to change who children are, but to know them, and support them, better.</blockquote>
+    <p>Our mission</p>
   </section>
 
   <div class="case-body wrap">
     <nav class="steps" aria-label="Case study sections">
       <ol>
-        <li><a href="#idea">The idea</a></li>
-        <li><a href="#day">The day at a glance</a></li>
-        <li><a href="#moment">Help in the moment</a></li>
-        <li><a href="#sleep">Sleep and activity</a></li>
-        <li><a href="#care">Calm by design</a></li>
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#brand">Style guide</a></li>
+        <li><a href="#wireframes">Wireframes</a></li>
+        <li><a href="#ai">Built with Claude</a></li>
+        <li><a href="#app">The app</a></li>
       </ol>
       <div class="bar" aria-hidden="true"><span></span></div>
     </nav>
 
     <div>
-      <section id="idea" class="chapter">
-        <h2>A clearer picture of a child’s day</h2>
-        <p>Sensori is a soft printed fabric band holding a small sensor pod, paired with an app for parents. It turns heart rate, movement and sleep into a simple picture of a child’s day, with gentle suggestions for what might help.</p>
-        <p>It’s for every child, designed with sensory needs in mind. It isn’t a medical device: it never diagnoses or treats anything.</p>
+      <section id="problem" class="chapter">
+        <h2>Always a step behind</h2>
+        <p>Parents often only find out how a child’s day went afterwards. The signals were usually there, like a restless night or a busy morning, but invisible in the moment. And most wearables talk in charts, targets and alerts built for adults.</p>
+        <div class="principles"><p>So Sensori is</p><ul><li><b>For every child</b><span>Designed with sensory needs in mind, diagnosis or not.</span></li><li><b>Helpful, not medical</b><span>It never diagnoses, and says so on screen two.</span></li><li><b>Private by default</b><span>The family owns the data. It’s never sold.</span></li></ul></div>
+      </section>
+
+      <section id="brand" class="chapter">
+        <h2>Calm enough to trust, playful enough to wear</h2>
+        <div class="brandrow"><div class="br-col"><h4>Colour</h4><ul class="dots"><li><span class="dot" style="background:#1d1d21"></span><b>Ink</b><code>#1d1d21</code></li><li><span class="dot" style="background:#faf8f5"></span><b>Ground</b><code>#faf8f5</code></li><li><span class="dot" style="background:#efe9fb"></span><b>Lilac</b><code>#efe9fb</code></li><li><span class="dot" style="background:#6a4fc2"></span><b>Purple</b><code>#6a4fc2</code></li><li><span class="dot" style="background:#2a9f45"></span><b>Green</b><code>#2a9f45</code></li></ul></div><div class="br-col"><h4>Type</h4><ul class="types"><li><span class="aa" style="font-family:'Geist', 'Inter', sans-serif;font-weight:400">Aa</span><b>Geist</b><span>Brand</span></li><li><span class="aa" style="font-family:'Nunito', 'Inter', sans-serif;font-weight:700">Aa</span><b>Nunito</b><span>App</span></li><li><span class="aa" style="font-family:'Caveat', cursive;font-weight:500">Aa</span><b>Caveat</b><span>Accents</span></li></ul></div><div class="br-col"><h4>Voice</h4><p class="say">Emma seems calm</p><p class="never">Meltdown alert!</p><p class="voice">Feelings always “seem”. No red, no exclamation marks, no urgency.</p></div></div>
+        <div class="marquee" aria-label="Eight band prints"><ul><li><img src="images/sensori/bands/band-daisy.webp" width="800" height="800" alt="Daisy band" loading="lazy"><span>Daisy</span></li><li><img src="images/sensori/bands/band-poppet.webp" width="800" height="800" alt="Poppet band" loading="lazy"><span>Poppet</span></li><li><img src="images/sensori/bands/band-space.webp" width="800" height="800" alt="Space band" loading="lazy"><span>Space</span></li><li><img src="images/sensori/bands/band-dino.webp" width="800" height="800" alt="Dinosaurs band" loading="lazy"><span>Dinosaurs</span></li><li><img src="images/sensori/bands/band-rainbow.webp" width="800" height="800" alt="Rainbow band" loading="lazy"><span>Rainbow</span></li><li><img src="images/sensori/bands/band-hearts.webp" width="800" height="800" alt="Hearts band" loading="lazy"><span>Hearts</span></li><li><img src="images/sensori/bands/band-ocean.webp" width="800" height="800" alt="Ocean band" loading="lazy"><span>Ocean</span></li><li><img src="images/sensori/bands/band-sunset.webp" width="800" height="800" alt="Sunset band" loading="lazy"><span>Sunset</span></li><li><img src="images/sensori/bands/band-daisy.webp" width="800" height="800" aria-hidden="true" alt="Daisy band" loading="lazy"><span>Daisy</span></li><li><img src="images/sensori/bands/band-poppet.webp" width="800" height="800" aria-hidden="true" alt="Poppet band" loading="lazy"><span>Poppet</span></li><li><img src="images/sensori/bands/band-space.webp" width="800" height="800" aria-hidden="true" alt="Space band" loading="lazy"><span>Space</span></li><li><img src="images/sensori/bands/band-dino.webp" width="800" height="800" aria-hidden="true" alt="Dinosaurs band" loading="lazy"><span>Dinosaurs</span></li><li><img src="images/sensori/bands/band-rainbow.webp" width="800" height="800" aria-hidden="true" alt="Rainbow band" loading="lazy"><span>Rainbow</span></li><li><img src="images/sensori/bands/band-hearts.webp" width="800" height="800" aria-hidden="true" alt="Hearts band" loading="lazy"><span>Hearts</span></li><li><img src="images/sensori/bands/band-ocean.webp" width="800" height="800" aria-hidden="true" alt="Ocean band" loading="lazy"><span>Ocean</span></li><li><img src="images/sensori/bands/band-sunset.webp" width="800" height="800" aria-hidden="true" alt="Sunset band" loading="lazy"><span>Sunset</span></li></ul></div>
+      </section>
+
+      <section id="wireframes" class="chapter">
+        <h2>41 screens, mapped before any pixels</h2>
+        <p>I mapped the whole MVP first: eight flows, from the QR code on the box to the everyday tabs, with every state and the reasoning behind it.</p>
         <div class="stats">
-          <div class="stat"><span class="stat-n" data-count="41" data-suffix="">41</span><span class="stat-label">MVP screens</span><p>Designed end to end, from onboarding and pairing the band to daily insights.</p></div>
-          <div class="stat"><span class="stat-n" data-count="7" data-suffix="">7</span><span class="stat-label">Days of learning</span><p>The app learns what’s usual for each child before it suggests anything.</p></div>
-          <div class="stat"><span class="stat-n" data-count="3" data-suffix="">3</span><span class="stat-label">Notifications a day, at most</span><p>Key-moment alerts are off by default, so parents choose what reaches them.</p></div>
+          <div class="stat"><span class="stat-n" data-count="41" data-suffix="">41</span><span class="stat-label">Screens</span><p>Across eight flows, onboarding to settings.</p></div>
+          <div class="stat"><span class="stat-n" data-count="7" data-suffix="">7</span><span class="stat-label">Days of learning</span><p>Before the app suggests anything.</p></div>
+          <div class="stat"><span class="stat-n" data-count="3" data-suffix="">3</span><span class="stat-label">Alerts a day, at most</span><p>Off by default, and never a sound.</p></div>
         </div>
+        <div class="media">
+          <figure><img src="images/sensori/wf/ia.jpg" width="2400" height="1218" alt="Information architecture: eight flows and 41 screens" loading="lazy"><figcaption>The information architecture. Click to enlarge.</figcaption></figure>
+        </div>
+        <div class="strip-wrap"><div class="strip" tabindex="0" aria-label="Wireframes, scroll sideways"><figure><img src="images/sensori/wf/on-02.png" width="560" height="1213" alt="Wireframe ON-02: Honest expectations" loading="lazy"><figcaption><code>ON-02</code> Honest expectations</figcaption></figure><figure><img src="images/sensori/wf/on-03.png" width="560" height="1213" alt="Wireframe ON-03: The privacy promise" loading="lazy"><figcaption><code>ON-03</code> The privacy promise</figcaption></figure><figure><img src="images/sensori/wf/cp-01.png" width="560" height="1213" alt="Wireframe CP-01: No diagnosis asked" loading="lazy"><figcaption><code>CP-01</code> No diagnosis asked</figcaption></figure><figure><img src="images/sensori/wf/hm-01.png" width="560" height="1213" alt="Wireframe HM-01: The learning week" loading="lazy"><figcaption><code>HM-01</code> The learning week</figcaption></figure><figure><img src="images/sensori/wf/hm-04.png" width="560" height="1213" alt="Wireframe HM-04: A key moment" loading="lazy"><figcaption><code>HM-04</code> A key moment</figcaption></figure><figure><img src="images/sensori/wf/hm-06.png" width="560" height="1213" alt="Wireframe HM-06: Notifications, in final words" loading="lazy"><figcaption><code>HM-06</code> Notifications, in final words</figcaption></figure><figure><img src="images/sensori/wf/em-01.png" width="560" height="1213" alt="Wireframe EM-01: The day’s timeline" loading="lazy"><figcaption><code>EM-01</code> The day’s timeline</figcaption></figure><figure><img src="images/sensori/wf/st-06.png" width="560" height="1213" alt="Wireframe ST-06: Privacy and data" loading="lazy"><figcaption><code>ST-06</code> Privacy and data</figcaption></figure></div><p class="hint">Scroll sideways for more</p></div>
       </section>
 
-      <section id="day" class="chapter">
-        <h2>How are things going today?</h2>
-        <p>Home answers the question every parent asks first. Emotions turns heart rate and movement into a gentle read of the day, in words like ‘seems’ and ‘may’, never alarms.</p>
-        <div class="media phones">
-          <figure><img src="images/sensori/m-home.png" width="600" height="1261" alt="Home screen: Good morning, currently at school, with heart rate, steps and sleep" loading="lazy"></figure>
-          <figure><img src="images/sensori/m-emotions.png" width="600" height="1261" alt="Emotions screen: a calm day, with a week of mood characters" loading="lazy"></figure>
-        </div>
+      <section id="ai" class="chapter">
+        <h2>Built with Claude, checked by experts</h2>
+        <ol class="aisteps"><li><b>Research</b><span>Checked all 22 sensory activities against NHS and RCOT guidance. 13 safety and wording changes followed.</span></li><li><b>Challenge</b><span>Pressure-tested decisions against the medical-device line, privacy and the voice rules.</span></li><li><b>Build</b><span>The wireframes, the working prototype and the website, all built with Claude.</span></li><li><b>Test</b><span>Every app state, from day one to a band left off, clickable end to end.</span></li></ol>
+        <p class="note">Claude’s research speeds up the occupational therapist’s review. It doesn’t replace it.</p>
       </section>
 
-      <section id="moment" class="chapter">
-        <h2>Ideas that help right now</h2>
-        <p>When a child seems overwhelmed, full of energy or ready to wind down, the app offers two or three ideas to try, and the ones that helped before come first. Breathing exercises and calming sounds are a tap away, and every activity done together earns a star that’s never taken away.</p>
-        <div class="media phones three">
-          <figure><img src="images/sensori/m-activities.png" width="600" height="1261" alt="Sensory activities: what does Emma need right now?" loading="lazy"></figure>
-          <figure><img src="images/sensori/m-breathe.png" width="600" height="1261" alt="Breathe together: choose a breathing exercise" loading="lazy"></figure>
-          <figure><img src="images/sensori/m-sounds.png" width="600" height="1261" alt="Calming sounds: rain, ocean waves, heartbeat and more" loading="lazy"></figure>
-        </div>
-      </section>
-
-      <section id="sleep" class="chapter">
-        <h2>Compared with what’s usual, not a target</h2>
-        <p>Sleep and activity are measured against the child’s own baseline, so a parent can spot a good night or a quieter day without judgement.</p>
-        <div class="media phones">
-          <figure><img src="images/sensori/m-sleep.png" width="600" height="1261" alt="Sleep screen: 10 hours 40 minutes asleep, woke once" loading="lazy"></figure>
-          <figure><img src="images/sensori/m-activity.png" width="600" height="1261" alt="Activity screen: steps today compared with a usual day" loading="lazy"></figure>
-        </div>
-      </section>
-
-      <section id="care" class="chapter">
-        <h2>Calm by design</h2>
-        <p>Every word and colour was chosen to keep parents calm. The app has no red, no exclamation marks and no urgency words, and it talks about stress signals rather than meltdowns.</p>
-        <p>Privacy is just as deliberate. No diagnosis is asked for at sign-up, there’s one child per account, and data is stored only on the parent’s phone.</p>
-        <div class="media phones">
-          <figure><img src="images/sensori/m-settings.png" width="600" height="1261" alt="Settings: the child’s profile, band, notifications and data stored only on this phone" loading="lazy"></figure>
-          <figure><img src="images/sensori/m-profile.png" width="600" height="1261" alt="Choosing the child’s picture from friendly characters" loading="lazy"></figure>
-        </div>
+      <section id="app" class="chapter">
+        <h2>From wireframe to finished app</h2>
+        <div class="compare-wrap"><div class="compare" style="--pos:50%"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Home, finished"><div class="cmp-top"><img src="images/sensori/wf/hm-01-compare.png" width="600" height="1261" alt="Home, wireframe"></div><span class="cmp-line" aria-hidden="true"></span><input type="range" min="0" max="100" value="50" aria-label="Compare the wireframe with the finished screen"></div><div class="cmp-labels"><span>Wireframe</span><span>Finished</span></div></div>
+        <div class="viewer"><div class="v-side"><div class="v-tabs" role="tablist" aria-label="App screens"><button type="button" role="tab" aria-selected="true" data-i="0">Today</button><button type="button" role="tab" aria-selected="false" data-i="1">Emotions</button><button type="button" role="tab" aria-selected="false" data-i="2">Help now</button><button type="button" role="tab" aria-selected="false" data-i="3">Breathe</button><button type="button" role="tab" aria-selected="false" data-i="4">Sleep</button><button type="button" role="tab" aria-selected="false" data-i="5">Settings</button></div><div class="v-caps" aria-live="polite"><p class="on" data-i="0">How are things going today? The answer, at a glance.</p><p class="" data-i="1">A gentle read of the day, in words like “seems” and “may”.</p><p class="" data-i="2">Two or three ideas to try, and the ones that helped before come first.</p><p class="" data-i="3">Breathing together earns a star that’s never taken away.</p><p class="" data-i="4">Compared with what’s usual for the child, not a target.</p><p class="" data-i="5">One child per account, and data stored only on the parent’s phone.</p></div></div><div class="v-phone"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Today screen" class="on" data-i="0" loading="lazy"><img src="images/sensori/m-emotions.png" width="600" height="1261" alt="Emotions screen" class="" data-i="1" loading="lazy"><img src="images/sensori/m-activities.png" width="600" height="1261" alt="Help now screen" class="" data-i="2" loading="lazy"><img src="images/sensori/m-breathe.png" width="600" height="1261" alt="Breathe screen" class="" data-i="3" loading="lazy"><img src="images/sensori/m-sleep.png" width="600" height="1261" alt="Sleep screen" class="" data-i="4" loading="lazy"><img src="images/sensori/m-settings.png" width="600" height="1261" alt="Settings screen" class="" data-i="5" loading="lazy"></div></div>
       </section>
 
     </div>
@@ -541,12 +662,62 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     stats.forEach(function (s) { io.observe(s); });
   }
 
+  // Wireframe vs finished slider
+  document.querySelectorAll('.compare').forEach(function (c) {
+    var r = c.querySelector('input');
+    r.addEventListener('input', function () { c.style.setProperty('--pos', r.value + '%'); });
+  });
+
+  // Phone viewer: tabs swap the screen; gently tours the screens until someone interacts
+  document.querySelectorAll('.viewer').forEach(function (v) {
+    var tabs = v.querySelectorAll('[role="tab"]'), shots = v.querySelectorAll('.v-phone img'), caps = v.querySelectorAll('.v-caps p');
+    var cur = 0, timer = null, touched = false;
+    function show(i, focus) {
+      cur = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, k) { t.setAttribute('aria-selected', k === cur ? 'true' : 'false'); t.tabIndex = k === cur ? 0 : -1; });
+      shots.forEach(function (s, k) { s.classList.toggle('on', k === cur); if (k === cur) s.loading = 'eager'; });
+      caps.forEach(function (p, k) { p.classList.toggle('on', k === cur); });
+      if (focus) tabs[cur].focus();
+    }
+    function stop() { touched = true; clearInterval(timer); timer = null; }
+    tabs.forEach(function (t, k) {
+      t.tabIndex = k === 0 ? 0 : -1;
+      t.addEventListener('click', function () { stop(); show(k); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); stop(); show(cur + 1, true); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); stop(); show(cur - 1, true); }
+      });
+    });
+    shots.forEach(function (s) { s.loading = 'eager'; });
+    if (!reduce && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && !touched && !timer) timer = setInterval(function () { show(cur + 1); }, 3200);
+          if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+        });
+      }, { threshold: 0.5 }).observe(v);
+    }
+  });
+
+  // Wireframe strip: drag to scroll with a mouse
+  document.querySelectorAll('.strip').forEach(function (s) {
+    var down = false, x0 = 0, s0 = 0, moved = false;
+    s.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; moved = false; x0 = e.clientX; s0 = s.scrollLeft; });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return; var dx = e.clientX - x0;
+      if (Math.abs(dx) > 4) { moved = true; s.classList.add('dragging'); }
+      s.scrollLeft = s0 - dx;
+    });
+    window.addEventListener('pointerup', function () { if (!down) return; down = false; s.classList.remove('dragging'); });
+    s.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+  });
+
   // Lightbox for case-study images
   var lb = document.querySelector('.lightbox');
   if (lb) {
     var lbImg = lb.querySelector('img'), lastFocus = null;
     function close() { lb.hidden = true; lbImg.removeAttribute('src'); if (lastFocus) lastFocus.focus(); }
-    document.querySelectorAll('.media img').forEach(function (im) {
+    document.querySelectorAll('.media img, .strip img').forEach(function (im) {
       im.addEventListener('click', function () {
         lastFocus = document.activeElement; lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lb.hidden = false; lb.querySelector('.lb-close').focus();
       });
