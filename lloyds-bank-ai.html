@@ -6,6 +6,10 @@
 <title>AI Call Assist — Amrit Singh Bhogal</title>
 <meta name="description" content="AI note-taking for Lloyds call handlers, designed to cut manual work and speed up every call.">
 <meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#fbfbfc">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
@@ -309,6 +313,137 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
+
+/* ---------- Story sections (Sensori) ---------- */
+.chapter h3.sub { margin: 44px 0 14px; font: 600 21px/1.3 var(--body); letter-spacing: -.01em; }
+.chapter h3.sub:first-of-type { margin-top: 28px; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 28px 0 20px; }
+.cards.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card { background: var(--raised); border: 1px solid var(--line); border-radius: 6px; padding: 22px 24px; }
+.card h4 { margin: 0 0 8px; font: 600 17px/1.3 var(--body); }
+.card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.sw { display: grid; gap: 3px; font-size: 14px; }
+.sw .chip-c { aspect-ratio: 4 / 3; border-radius: 6px; border: 1px solid var(--line); margin-bottom: 8px; }
+.sw code { font: 500 13px/1.3 ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); }
+.sw span:last-child { color: var(--muted); font-size: 13px; line-height: 1.4; }
+.specs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.spec { display: grid; gap: 4px; border-top: 1px solid var(--ink); padding-top: 16px; font-size: 14px; }
+.spec .spec-s { font-size: clamp(26px, 2.4vw, 34px); line-height: 1.15; margin-bottom: 14px; text-wrap: balance; }
+.spec span:last-child { color: var(--muted); }
+.bands { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.bands figure { margin: 0; }
+.bands img { width: 100%; aspect-ratio: 1; object-fit: contain; padding: 6%; background: var(--raised); border: 1px solid var(--line); border-radius: 6px; }
+.bands figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); text-align: center; }
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+.rule { border-radius: 6px; padding: 20px 24px; border: 1px solid var(--line); }
+.rule.yes { background: color-mix(in srgb, #2a9f45 9%, var(--raised)); }
+.rule.no { background: color-mix(in srgb, #b4532a 8%, var(--raised)); }
+.rule h4 { margin: 0 0 10px; font: 600 15px/1.3 var(--body); }
+.rule ul { list-style: none; margin: 0; padding: 0; }
+.rule li { padding: 9px 0; border-top: 1px solid var(--line); font-size: 16px; }
+.rule.no li { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+.media.phones.four figcaption { background: transparent; text-align: center; }
+@media (max-width: 900px) {
+  .cards, .cards.n3 { grid-template-columns: minmax(0, 1fr); }
+  .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .specs { grid-template-columns: minmax(0, 1fr); }
+  .bands { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rules { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .card, .sw, .spec, .bands figure, .rule { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 50%; }
+  }
+}
+
+.stats + p, .stats + h3.sub { margin-top: 36px; }
+.cards + p { margin-top: 8px; }
+
+/* ---------- Compact Sensori story ---------- */
+.principles { margin-top: 28px; }
+.principles > p { margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.principles ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.principles li { display: grid; gap: 4px; border-top: 2px solid var(--c); padding-top: 12px; }
+.principles b { font-size: 17px; }
+.principles span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+.brandrow { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 40px; margin-top: 8px; }
+.br-col h4 { margin: 0 0 14px; font: 600 14px/1.2 var(--body); color: var(--muted); }
+.br-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.dots li { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+.dots .dot { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); flex: none; }
+.dots code { margin-left: auto; font: 500 12px/1 ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); }
+.types li { display: grid; grid-template-columns: 64px auto 1fr; align-items: baseline; gap: 10px; }
+.types .aa { font-size: 40px; line-height: 1; }
+.types li > span:last-child { color: var(--muted); font-size: 14px; }
+.br-col .say, .br-col .never { margin: 0 0 6px; font: 600 22px/1.3 var(--body); }
+.br-col .never { color: var(--muted); font-weight: 400; text-decoration: line-through; text-decoration-thickness: 1px; }
+.br-col .voice { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+.marquee { margin-top: 40px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 16px; width: max-content; }
+.marquee li { flex: none; width: 168px; text-align: center; font-size: 14px; color: var(--muted); }
+.marquee img { width: 168px; aspect-ratio: 1; object-fit: contain; padding: 8%; margin-bottom: 8px; background: var(--raised); border: 1px solid var(--line); border-radius: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .marquee ul { animation: marquee 38s linear infinite; }
+  .marquee:hover ul { animation-play-state: paused; }
+}
+@media (prefers-reduced-motion: reduce) { .marquee { overflow-x: auto; } }
+@keyframes marquee { to { transform: translateX(calc(-50% - 8px)); } }
+
+.strip-wrap { margin-top: 28px; }
+.strip { display: grid; grid-auto-flow: column; grid-auto-columns: 210px; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; cursor: grab; scrollbar-width: thin; }
+.strip.dragging { cursor: grabbing; scroll-snap-type: none; }
+.strip figure { margin: 0; scroll-snap-align: start; }
+.strip img { width: 100%; pointer-events: auto; -webkit-user-drag: none; user-select: none; }
+.strip figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); }
+.strip figcaption code { font: 500 12px/1 ui-monospace, "SF Mono", Menlo, monospace; color: var(--ink); margin-right: 4px; }
+.hint { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+
+.aisteps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; counter-reset: ai; }
+.aisteps li { display: grid; gap: 6px; border-top: 2px solid var(--c); padding-top: 14px; counter-increment: ai; }
+.aisteps li::before { content: counter(ai); font: 700 13px/1 var(--body); color: var(--muted); font-variant-numeric: tabular-nums; }
+.aisteps b { font-size: 18px; }
+.aisteps span { color: var(--muted); font-size: 15px; line-height: 1.55; }
+.chapter .note { margin: 24px 0 0; color: var(--muted); font-size: 15px; }
+
+#app.chapter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 40px; align-items: start; }
+#app.chapter > h2 { grid-column: 1 / -1; margin-bottom: 24px; }
+.compare-wrap { max-width: 300px; justify-self: center; width: 100%; }
+.compare { position: relative; border-radius: 34px; overflow: hidden; touch-action: pan-y; }
+.compare > img { width: 100%; display: block; }
+.cmp-top { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.cmp-top img { width: 100%; height: 100%; display: block; }
+.cmp-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--c); pointer-events: none; }
+.cmp-line::after { content: ""; position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: var(--c); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.compare:has(input:focus-visible) { outline: 2px solid var(--signal); outline-offset: 4px; }
+.cmp-labels { display: flex; justify-content: space-between; margin-top: 10px; font-size: 14px; color: var(--muted); }
+.viewer { display: grid; gap: 16px; max-width: 360px; justify-self: center; width: 100%; }
+.v-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.v-tabs button { font: 500 14px/1 var(--body); color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.v-tabs button:hover { color: var(--ink); border-color: var(--ink); }
+.v-tabs button[aria-selected="true"] { background: var(--c); border-color: var(--c); color: var(--fg); }
+.v-caps p { display: none; margin: 0; font-size: 15px; color: var(--muted); min-height: 3em; }
+.v-caps p.on { display: block; animation: fade-up .45s cubic-bezier(.2, .7, .2, 1) both; }
+.v-phone { position: relative; aspect-ratio: 600 / 1261; max-width: 300px; }
+.v-phone img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transform: translateY(12px) scale(.98); transition: opacity .45s ease, transform .55s cubic-bezier(.2, .7, .2, 1); }
+.v-phone img.on { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .principles ul, .brandrow, .aisteps { grid-template-columns: minmax(0, 1fr); }
+  .aisteps { gap: 18px; }
+  #app.chapter { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .strip { margin-right: calc(-1 * max(var(--gutter), env(safe-area-inset-right, 0px))); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .principles li, .aisteps li, .br-col, .strip figure { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 45%; }
+  }
+}
+.v-phone { width: 100%; justify-self: center; }
+.v-caps { margin-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -538,12 +673,62 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     stats.forEach(function (s) { io.observe(s); });
   }
 
+  // Wireframe vs finished slider
+  document.querySelectorAll('.compare').forEach(function (c) {
+    var r = c.querySelector('input');
+    r.addEventListener('input', function () { c.style.setProperty('--pos', r.value + '%'); });
+  });
+
+  // Phone viewer: tabs swap the screen; gently tours the screens until someone interacts
+  document.querySelectorAll('.viewer').forEach(function (v) {
+    var tabs = v.querySelectorAll('[role="tab"]'), shots = v.querySelectorAll('.v-phone img'), caps = v.querySelectorAll('.v-caps p');
+    var cur = 0, timer = null, touched = false;
+    function show(i, focus) {
+      cur = (i + tabs.length) % tabs.length;
+      tabs.forEach(function (t, k) { t.setAttribute('aria-selected', k === cur ? 'true' : 'false'); t.tabIndex = k === cur ? 0 : -1; });
+      shots.forEach(function (s, k) { s.classList.toggle('on', k === cur); if (k === cur) s.loading = 'eager'; });
+      caps.forEach(function (p, k) { p.classList.toggle('on', k === cur); });
+      if (focus) tabs[cur].focus();
+    }
+    function stop() { touched = true; clearInterval(timer); timer = null; }
+    tabs.forEach(function (t, k) {
+      t.tabIndex = k === 0 ? 0 : -1;
+      t.addEventListener('click', function () { stop(); show(k); });
+      t.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); stop(); show(cur + 1, true); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); stop(); show(cur - 1, true); }
+      });
+    });
+    shots.forEach(function (s) { s.loading = 'eager'; });
+    if (!reduce && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting && !touched && !timer) timer = setInterval(function () { show(cur + 1); }, 3200);
+          if (!e.isIntersecting && timer) { clearInterval(timer); timer = null; }
+        });
+      }, { threshold: 0.5 }).observe(v);
+    }
+  });
+
+  // Wireframe strip: drag to scroll with a mouse
+  document.querySelectorAll('.strip').forEach(function (s) {
+    var down = false, x0 = 0, s0 = 0, moved = false;
+    s.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; moved = false; x0 = e.clientX; s0 = s.scrollLeft; });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return; var dx = e.clientX - x0;
+      if (Math.abs(dx) > 4) { moved = true; s.classList.add('dragging'); }
+      s.scrollLeft = s0 - dx;
+    });
+    window.addEventListener('pointerup', function () { if (!down) return; down = false; s.classList.remove('dragging'); });
+    s.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+  });
+
   // Lightbox for case-study images
   var lb = document.querySelector('.lightbox');
   if (lb) {
     var lbImg = lb.querySelector('img'), lastFocus = null;
     function close() { lb.hidden = true; lbImg.removeAttribute('src'); if (lastFocus) lastFocus.focus(); }
-    document.querySelectorAll('.media img').forEach(function (im) {
+    document.querySelectorAll('.media img, .strip img').forEach(function (im) {
       im.addEventListener('click', function () {
         lastFocus = document.activeElement; lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lb.hidden = false; lb.querySelector('.lb-close').focus();
       });
