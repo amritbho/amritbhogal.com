@@ -445,6 +445,19 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 .v-phone { width: 100%; justify-self: center; }
 .v-caps { margin-bottom: 4px; }
+/* App chapter: two phones the same size, tops aligned, controls underneath */
+#app.chapter { align-items: start; }
+.compare-wrap, .viewer { max-width: 300px; width: 100%; justify-self: center; }
+.viewer { display: flex; flex-direction: column; gap: 14px; }
+.viewer .v-phone { order: 1; max-width: none; }
+.viewer .v-side { order: 2; display: grid; gap: 10px; }
+.v-tabs { justify-content: center; }
+.v-tabs button { padding: 8px 12px; font-size: 13px; }
+.v-caps p { text-align: center; min-height: 2.8em; font-size: 14px; }
+.cmp-labels { align-items: baseline; font-size: 13px; }
+.cmp-labels em { font-style: normal; color: var(--ink); font-weight: 500; }
+.cmp-line::after { width: 36px; height: 36px; margin: -18px 0 0 -18px; }
+.cmp-line::before { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); z-index: 1; color: var(--fg); font: 600 15px/1 var(--body); letter-spacing: 3px; white-space: nowrap; padding-left: 3px; }
 </style>
 </head>
 <body>
@@ -527,7 +540,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
       <section id="app" class="chapter">
         <h2>From wireframe to finished app</h2>
-        <div class="compare-wrap"><div class="compare" style="--pos:50%"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Home, finished"><div class="cmp-top"><img src="images/sensori/wf/hm-01-compare.png" width="600" height="1261" alt="Home, wireframe"></div><span class="cmp-line" aria-hidden="true"></span><input type="range" min="0" max="100" value="50" aria-label="Compare the wireframe with the finished screen"></div><div class="cmp-labels"><span>Wireframe</span><span>Finished</span></div></div>
+        <div class="compare-wrap"><div class="compare" style="--pos:50%"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Home, finished"><div class="cmp-top"><img src="images/sensori/wf/hm-01-compare.png" width="600" height="1261" alt="Home, wireframe"></div><span class="cmp-line" aria-hidden="true"></span><input type="range" min="0" max="100" value="50" aria-label="Compare the wireframe with the finished screen"></div><div class="cmp-labels"><span>Wireframe</span><em>Drag to compare</em><span>Finished</span></div></div>
         <div class="viewer"><div class="v-side"><div class="v-tabs" role="tablist" aria-label="App screens"><button type="button" role="tab" aria-selected="true" data-i="0">Today</button><button type="button" role="tab" aria-selected="false" data-i="1">Emotions</button><button type="button" role="tab" aria-selected="false" data-i="2">Help now</button><button type="button" role="tab" aria-selected="false" data-i="3">Breathe</button><button type="button" role="tab" aria-selected="false" data-i="4">Sleep</button><button type="button" role="tab" aria-selected="false" data-i="5">Settings</button></div><div class="v-caps" aria-live="polite"><p class="on" data-i="0">How are things going today? The answer, at a glance.</p><p class="" data-i="1">A gentle read of the day, in words like “seems” and “may”.</p><p class="" data-i="2">Two or three ideas to try, and the ones that helped before come first.</p><p class="" data-i="3">Breathing together earns a star that’s never taken away.</p><p class="" data-i="4">Compared with what’s usual for the child, not a target.</p><p class="" data-i="5">One child per account, and data stored only on the parent’s phone.</p></div></div><div class="v-phone"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Today screen" class="on" data-i="0" loading="lazy"><img src="images/sensori/m-emotions.png" width="600" height="1261" alt="Emotions screen" class="" data-i="1" loading="lazy"><img src="images/sensori/m-activities.png" width="600" height="1261" alt="Help now screen" class="" data-i="2" loading="lazy"><img src="images/sensori/m-breathe.png" width="600" height="1261" alt="Breathe screen" class="" data-i="3" loading="lazy"><img src="images/sensori/m-sleep.png" width="600" height="1261" alt="Sleep screen" class="" data-i="4" loading="lazy"><img src="images/sensori/m-settings.png" width="600" height="1261" alt="Settings screen" class="" data-i="5" loading="lazy"></div></div>
       </section>
 
