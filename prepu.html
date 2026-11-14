@@ -484,8 +484,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Plinklet device demo */
 .plk { margin-top: 32px; display: grid; justify-items: center; gap: 20px; }
-.plk-shell { width: min(100%, 520px); background: #9edfd2; border-radius: 34px; padding: 22px 22px 16px; box-shadow: inset 0 -6px 0 rgba(11, 31, 68, .14), 0 18px 40px -22px rgba(11, 31, 68, .45); }
-.plk-screen { position: relative; aspect-ratio: 4 / 3; background: #0b1f44; border-radius: 12px; overflow: hidden; border: 8px solid #0b1f44; box-sizing: content-box; width: calc(100% - 16px); }
+/* Body, bezel and buttons follow the real Plinklet (M5Stack Core): a rounded mint cube, black bezel, three grey buttons, red side button. 1 design px = 100cqw / 268 */
+.plk-dev { width: min(100%, 420px); container-type: inline-size; padding-left: 2.2%; box-sizing: border-box; }
+.plk-shell { position: relative; aspect-ratio: 268 / 256; border-radius: 17.16cqw; padding: 5.97cqw; box-sizing: border-box;
+  background: linear-gradient(160deg, #bdeee4, #93d9cb 55%, #74c4b5);
+  box-shadow: inset 0 -3.73cqw 0 rgba(0, 0, 0, .08), 0 11.2cqw 14.9cqw -9cqw rgba(11, 31, 68, .5); }
+.plk-bezel { height: 100%; box-sizing: border-box; border-radius: 11.2cqw; background: #14161c; padding: 5.97cqw 5.97cqw 0; display: flex; flex-direction: column; align-items: center; gap: 3.6cqw; }
+.plk-screen { position: relative; width: 100%; aspect-ratio: 4 / 3; background: #0b1f44; border-radius: 2.24cqw; overflow: hidden; }
 .plk-s { position: absolute; left: 0; top: 0; width: 320px; height: 240px; transform-origin: 0 0; }
 .plk-s > * { position: absolute; }
 .plk-s .b { display: block; }
@@ -502,8 +507,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .plk-sent.pop { animation: plk-drop .3s steps(4) both; }
 @keyframes plk-drop { from { transform: translateY(-100%); } to { transform: none; } }
 @keyframes plk-blink { 50% { opacity: 0; } }
-.plk-btns { display: flex; justify-content: center; gap: 22%; margin-top: 14px; }
-.plk-btns i { width: 44px; height: 12px; border-radius: 6px; background: #f2f6f5; box-shadow: 0 3px 0 rgba(11, 31, 68, .18); }
+.plk-btns { display: flex; gap: 6.72cqw; }
+.plk-btns i { width: 17.16cqw; height: 4.85cqw; border-radius: 1.49cqw; background: linear-gradient(#e1e4ea, #a9afb9); }
 .plk-ctrl { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .plk-ctrl button { font: 600 15px/1 var(--body); min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: #0b1f44; color: #fff; cursor: pointer; transition: transform .15s ease, opacity .2s; }
 .plk-ctrl button:hover:not(:disabled) { transform: translateY(-2px); }
@@ -517,6 +522,16 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero-logo { position: absolute; left: max(var(--gutter, 24px), 6vw); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: .28em; font: 900 clamp(34px, 6.4vw, 104px)/1 "Nunito", "Inter", sans-serif; letter-spacing: -0.03em; color: #0b1f44; pointer-events: none; }
 .case-hero .hero-logo img { width: 1.05em; height: auto; max-height: none; object-fit: contain; animation: none; filter: drop-shadow(0 .06em .12em rgba(11, 31, 68, .18)); }
 @media (max-width: 600px) { .hero-logo { top: 16%; transform: none; } }
+
+/* Plinklet canvas screen and real buttons */
+.plk-cv { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; filter: brightness(.94); transition: filter .2s; }
+.plk.lit .plk-cv { filter: none; }
+.plk-btns button { width: 17.16cqw; height: 7.9cqw; border-radius: 2.2cqw; box-shadow: inset 0 .5cqw 0 rgba(255, 255, 255, .55), inset 0 -.6cqw 0 rgba(0, 0, 0, .12); border: 0; padding: 0; cursor: pointer; background: linear-gradient(#e1e4ea, #a9afb9); transition: transform .08s; }
+.plk-btns button:active { transform: translateY(.6cqw); background: linear-gradient(#cfd3da, #9aa1ab); }
+.plk-btns button:focus-visible { outline: 2px solid #ffd447; outline-offset: 3px; }
+.plk-hint { margin: 0; font-size: 13px; color: var(--muted); text-align: center; max-width: 44ch; }
+.plk-ctrl .plk-sound { background: transparent; color: var(--muted); border: 1.5px solid var(--line); }
+.plk-ctrl .plk-sound[aria-pressed="false"] { text-decoration: line-through; }
 </style>
 </head>
 <body>
@@ -780,33 +795,136 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     s.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
   });
 
-  // Plinklet: a working copy of the device's goal screen. Add money and watch the jar fill.
+  // Plinklet: the device's own screens, redrawn with the firmware's drawing code, pixel font, images, timings and sounds
+  var PLK_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!?'.,:/- +", PLK_FONT = [[56,108,198,198,254,198,198,0],[252,198,198,252,198,198,252,0],[60,102,192,192,192,102,60,0],[248,204,198,198,198,204,248,0],[254,192,192,252,192,192,254,0],[254,192,192,252,192,192,192,0],[62,96,192,206,198,102,62,0],[198,198,198,254,198,198,198,0],[126,24,24,24,24,24,126,0],[6,6,6,6,6,198,124,0],[198,204,216,240,248,220,206,0],[96,96,96,96,96,96,126,0],[198,238,254,214,214,198,198,0],[198,230,246,222,206,198,198,0],[124,198,198,198,198,198,124,0],[252,198,198,198,252,192,192,0],[124,198,198,198,222,204,122,0],[252,198,198,206,248,220,206,0],[124,198,192,124,6,198,124,0],[126,24,24,24,24,24,24,0],[198,198,198,198,198,198,124,0],[198,198,198,238,124,56,16,0],[214,214,214,214,254,238,68,0],[198,198,108,56,108,198,198,0],[102,102,102,60,24,24,24,0],[254,14,28,56,112,224,254,0],[56,76,198,198,198,100,56,0],[24,56,24,24,24,24,126,0],[124,198,14,60,120,224,254,0],[126,12,24,60,6,198,124,0],[28,60,108,204,254,12,12,0],[252,192,252,6,6,198,124,0],[60,96,192,252,198,198,124,0],[254,198,12,24,48,48,48,0],[120,196,228,120,158,134,124,0],[124,198,198,126,6,12,120,0],[60,102,96,252,96,96,254,0],[56,56,56,48,48,0,48,0],[124,254,198,12,56,0,56,0],[48,48,48,0,0,0,0,0],[0,0,0,0,0,48,48,0],[0,0,0,0,0,48,48,96],[0,48,48,0,48,48,0,0],[2,4,8,16,32,64,128,0],[0,0,0,126,0,0,0,0],[0,0,0,0,0,0,0,0],[0,24,24,126,24,24,0,0]];
   document.querySelectorAll('.plk').forEach(function (el) {
-    var price = +el.dataset.price, start = +el.dataset.saved, saved = start, base = el.dataset.jar;
-    var scr = el.querySelector('.plk-screen'), s = el.querySelector('.plk-s');
-    var jar = el.querySelector('.plk-jar'), amt = el.querySelector('.plk-amt'), cheerEl = el.querySelector('.plk-cheer'), sent = el.querySelector('.plk-sent');
-    var adds = el.querySelectorAll('[data-add]'), sentTimer;
-    for (var i = 0; i <= 10; i++) { var im = new Image(); im.src = base + i + '.png'; }
-    function fit() { s.style.transform = 'scale(' + (scr.clientWidth / 320) + ')'; }
-    fit(); if ('ResizeObserver' in window) new ResizeObserver(fit).observe(scr); else window.addEventListener('resize', fit);
-    function cheer(c) { return c === 0 ? "LET'S GO!" : c <= 4 ? 'KEEP GOING!' : c === 5 ? 'HALFWAY!' : c <= 7 ? 'OVER HALFWAY!' : c <= 9 ? 'NEARLY THERE!' : 'YOU DID IT!'; }
-    function render() {
-      var c = Math.min(10, Math.floor(saved * 10 / price)), t = '£' + saved;
-      jar.src = base + c + '.png'; amt.textContent = t; amt.classList.toggle('sm', t.length > 4); cheerEl.textContent = cheer(c);
-      el.classList.toggle('done', saved >= price);
-      adds.forEach(function (b) { b.disabled = saved >= price; });
+    var dir = el.dataset.dir, price = +el.dataset.price, start = +el.dataset.saved, saved = start;
+    var NAME = el.dataset.name, CHILD = el.dataset.child;
+    var cv = el.querySelector('.plk-cv'), g = cv.getContext('2d');
+    var NAVY = '#0b1f44', WHITE = '#ffffff', GOLD = '#ffd447', GOLD_D = '#e9a800', CREAM = '#fff3d1', BROWN = '#8a6532', TAGSH = '#c7d3e8', SKY = '#8fc9f5', SENT_BG = '#163c7a';
+    var names = ['stars', 'stars-sent', 'coin72', 'coin96', 'g_bicycle', 'g36-bicycle', 'g36-other'];
+    for (var i = 0; i <= 10; i++) names.push('jar' + i);
+    var IM = {}, left = names.length;
+    names.forEach(function (n) { var im = new Image(); im.onload = im.onerror = function () { if (--left === 0) show(); }; im.src = dir + n + '.png'; IM[n] = im; });
+
+    // text: Press Start 2P 8x8 glyphs scaled by whole numbers, exactly as drawText() on the device
+    function prep(s) { return String(s).toUpperCase().replace(/£/g, '~'); }
+    function textW(s, size) { return prep(s).length * size; }
+    function text(x, y, s, size, col) {
+      var t = prep(s), sc = size / 8; g.fillStyle = col;
+      for (var n = 0; n < t.length; n++) {
+        var gi = PLK_CHARS.indexOf(t[n]); if (gi < 0) gi = PLK_CHARS.length - 1;
+        for (var r = 0; r < 8; r++) { var bits = PLK_FONT[gi][r];
+          for (var c = 0; c < 8; c++) if (bits & (0x80 >> c)) g.fillRect(x + n * size + c * sc, y + r * sc, sc, sc); }
+      }
     }
-    adds.forEach(function (b) {
+    function centred(y, s, size, col) { text((320 - textW(s, size)) / 2, y, s, size, col); }
+    function centredIn(x, w, y, s, size, col) { text(x + (w - textW(s, size)) / 2, y, s, size, col); }
+    function rect(x, y, w, h, col) { g.fillStyle = col; g.fillRect(x, y, w, h); }
+    function img(n, x, y, w, h) { if (IM[n].complete && IM[n].naturalWidth) g.drawImage(IM[n], x, y, w || IM[n].naturalWidth, h || IM[n].naturalHeight); }
+    function ribbon(s, fill, shadow, ink) { var w = textW(s, 16) + 20, x = (320 - w) / 2; rect(x, 11, w, 26, shadow); rect(x, 8, w, 26, fill); text(x + 10, 14, s, 16, ink); }
+    function coins() { return Math.max(0, Math.min(10, Math.floor(saved * 10 / price))); }
+    function cheer(c) { return c === 0 ? "LET'S GO!" : c <= 4 ? 'KEEP GOING!' : c === 5 ? 'HALFWAY!' : c <= 7 ? 'OVER HALFWAY!' : c <= 9 ? 'NEARLY THERE!' : 'YOU DID IT!'; }
+
+    function drawGoal() {
+      var c = coins(); img('stars', 0, 0);
+      img('g_bicycle', 4, 40, 144, 144);
+      rect(110, 62, 2, 16, WHITE); rect(108, 58, 84, 4, TAGSH); rect(108, 26, 84, 32, WHITE); rect(100, 34, 8, 16, WHITE);
+      g.fillStyle = WHITE; g.beginPath(); g.moveTo(108, 26); g.lineTo(100, 34); g.lineTo(108, 34); g.fill();
+      g.beginPath(); g.moveTo(100, 50); g.lineTo(108, 50); g.lineTo(108, 58); g.fill();
+      rect(104, 40, 4, 4, NAVY);
+      var pr = '£' + price; text(112 + (80 - textW(pr, 16)) / 2, 35, pr, 16, NAVY);
+      img('jar' + c, 210, 14, 88, 108);
+      rect(202, 125, 104, 36, BROWN); rect(202, 122, 104, 36, GOLD_D); rect(204, 124, 100, 32, CREAM);
+      var amt = '£' + saved, as = amt.length <= 4 ? 24 : 16;
+      centredIn(202, 104, as === 24 ? 130 : 134, amt, as, NAVY);
+      centred(200, cheer(c), 24, GOLD);
+    }
+    function drawHowMuch() {
+      img('stars', 0, 0); ribbon('HOW MUCH MORE?', GOLD, GOLD_D, NAVY);
+      img('g36-bicycle', 22, 62, 108, 108);
+      var amt = '£' + Math.max(0, price - saved), s = amt.length <= 4 ? 40 : amt.length === 5 ? 32 : 24;
+      text(156, 76 + (40 - s) / 2, amt, s, GOLD);
+      text(156, 128, 'MORE FOR', 16, WHITE); text(156, 152, NAME, 16, WHITE);
+    }
+    function drawNoGoal() { img('stars', 0, 0); ribbon('NEW GOAL?', GOLD, GOLD_D, NAVY); img('g36-other', 88, 52, 144, 144); centred(206, 'ASK A GROWN-UP', 16, WHITE); }
+    var SENT_SPK = [[88,52,8,8,0],[224,52,8,8,0],[64,92,16,8,0],[240,92,16,8,0],[88,128,8,8,0],[224,128,8,8,0],[24,64,8,8,1],[292,116,8,8,1],[40,136,8,8,2],[276,60,8,8,2]];
+    var REACH_SPK = [[156,36,8,12,0],[100,60,12,6,0],[208,60,12,6,0],[88,104,16,6,0],[216,104,16,6,0],[28,56,6,8,1],[56,128,8,6,1],[272,84,6,8,1],[296,140,6,6,1],[44,88,8,6,2],[252,48,6,6,2],[264,128,8,6,2],[16,144,6,6,2]];
+    function sparkles(a, on, bg) { var col = [GOLD, '#ff9ab2', '#7fe0c9']; a.forEach(function (s) { rect(s[0], s[1], s[2], s[3], (s[4] === 0 || on) ? col[s[4]] : bg); }); }
+    function drawGift(on) {
+      rect(0, 0, 320, 240, SENT_BG); img('stars-sent', 0, 0);
+      var rib = gift.from + ' SENT £' + gift.amount + '!';
+      if (textW(rib, 16) / 16 > 18) rib = 'FROM ' + gift.from + '!';
+      ribbon(rib, WHITE, SKY, NAVY); sparkles(SENT_SPK, on, SENT_BG);
+      var msg = !!gift.l1;
+      if (msg) img('coin72', 124, 44, 72, 72); else img('coin96', 112, 50, 96, 96);
+      var amt = '+£' + gift.amount, n = textW(amt, 8) / 8, sz = n <= 4 ? 40 : n === 5 ? 32 : 24;
+      centred((msg ? 122 : 164) + (40 - sz) / 2, amt, sz, GOLD);
+      if (msg) { rect(24, 176, 272, 56, SKY); rect(26, 178, 268, 52, NAVY);
+        text(24 + (272 - textW(gift.l1, 16)) / 2, 187, gift.l1, 16, WHITE); text(24 + (272 - textW(gift.l2, 16)) / 2, 207, gift.l2, 16, WHITE); }
+    }
+    function drawReached(on) {
+      img('stars', 0, 0); ribbon('YOU DID IT!', GOLD, GOLD_D, NAVY); sparkles(REACH_SPK, on, NAVY);
+      img('g36-bicycle', 16, 48, 108, 108);
+      var pr = '£' + price, n = textW(pr, 8) / 8, ps = n <= 3 ? 40 : n === 4 ? 32 : 24;
+      text(144 + (176 - textW(pr, ps)) / 2, 70, pr, ps, GOLD);
+      text(144 + (176 - textW('SAVED!', 24)) / 2, 118, 'SAVED!', 24, WHITE);
+      centred(170, NAME, 16, SKY); centred(202, 'WELL DONE, ' + CHILD + '!', 16, WHITE);
+    }
+
+    // sounds: the same bells the firmware synthesises (16 kHz), played only after a press on the page
+    var AC = null, sound = true;
+    function bells(len, list) {
+      if (!sound) return;
+      try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return; }
+      var SR = 16000, n = Math.round(len * SR), buf = AC.createBuffer(1, n, SR), d = buf.getChannelData(0);
+      list.forEach(function (b) { var st = Math.round(b[0] * SR), k = 6 / b[2];
+        for (var i = 0; st + i < n; i++) { var t = i / SR; if (t > b[2]) break;
+          var v = Math.sin(6.2831853 * b[1] * t) * Math.exp(-t * k) + 0.35 * Math.sin(6.2831853 * b[1] * 2.76 * t) * Math.exp(-t * k * 2.2) + 0.15 * Math.sin(6.2831853 * b[1] * 5.4 * t) * Math.exp(-t * k * 4);
+          d[st + i] += v * (1 - Math.exp(-t * 1500)) * b[3] / 32768; } });
+      var peak = 0; for (var j = 0; j < n; j++) peak = Math.max(peak, Math.abs(d[j]));
+      if (peak > 0.9) for (j = 0; j < n; j++) d[j] *= 0.9 / peak;
+      var src = AC.createBufferSource(), gain = AC.createGain(); gain.gain.value = 0.5; src.buffer = buf; src.connect(gain); gain.connect(AC.destination); src.start();
+    }
+    function chime() { bells(0.6, [[0, 2093, 0.34, 12000], [0.17, 1568, 0.22, 6600]]); }
+    function click() { bells(0.05, [[0, 2400, 0.045, 7000]]); }
+    function fanfare() { var run = [1046.5, 1174.7, 1318.5, 1568, 1760, 2093, 2349.3, 2637], l = run.map(function (f, i) { return [i * 0.075, f, 0.35, 3200 * 2.4]; });
+      bells(2, l.concat([[0.7, 1568, 1.1, 3000 * 2.4], [0.7, 2093, 1.1, 4500 * 2.4], [0.7, 2637, 1.1, 3500 * 2.4]])); }
+
+    // the device's states: 0 goal, 1 how much more; celebrations 1 new money (9 s), 2 goal reached (12 s, then stays until a press)
+    var page = 0, celeb = 0, pend = false, noGoal = false, twinkle = false, gift = {}, tick = null, endAt = null;
+    function show() {
+      if (celeb === 1) drawGift(twinkle); else if (celeb === 2) drawReached(twinkle);
+      else if (noGoal) drawNoGoal(); else if (pend) drawReached(true); else if (page === 1) drawHowMuch(); else drawGoal();
+      el.classList.toggle('lit', !!celeb);
+      el.querySelectorAll('[data-add]').forEach(function (b) { b.disabled = pend || noGoal || celeb === 2; });
+    }
+    function startCeleb(kind) {
+      celeb = kind; twinkle = false; clearInterval(tick); clearTimeout(endAt);
+      tick = setInterval(function () { twinkle = !twinkle; show(); }, 350);
+      endAt = setTimeout(endCeleb, kind === 1 ? 9000 : 12000);
+      show(); if (kind === 2) fanfare(); else chime();
+    }
+    function endCeleb() { celeb = 0; page = 0; clearInterval(tick); clearTimeout(endAt); show(); }
+    el.querySelectorAll('[data-add]').forEach(function (b) {
       b.addEventListener('click', function () {
-        var n = +b.dataset.add; saved = Math.min(price, saved + n);
-        sent.textContent = b.dataset.from.toUpperCase() + ' SENT £' + n + '!'; sent.hidden = false;
-        sent.classList.remove('pop'); void sent.offsetWidth; sent.classList.add('pop');
-        clearTimeout(sentTimer); sentTimer = setTimeout(function () { sent.hidden = true; }, 1800);
-        render();
+        var n = +b.dataset.add; saved += n;
+        gift = { from: b.dataset.from, amount: n, l1: b.dataset.l1 || '', l2: b.dataset.l2 || '' };
+        if (saved >= price) { pend = true; startCeleb(2); } else startCeleb(1);
       });
     });
-    el.querySelector('[data-reset]').addEventListener('click', function () { saved = start; sent.hidden = true; render(); });
-    render();
+    el.querySelectorAll('[data-btn]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        click();
+        if (celeb) { if (celeb === 2) { pend = false; noGoal = true; } endCeleb(); return; }   // any press skips a celebration
+        if (pend) { pend = false; noGoal = true; show(); return; }                              // press on the reached screen = seen it
+        if (b.dataset.btn === 'a' && !noGoal) { page = page === 0 ? 1 : 0; show(); }
+      });
+    });
+    el.querySelector('[data-reset]').addEventListener('click', function () { saved = start; page = 0; pend = false; noGoal = false; endCeleb(); });
+    var sb = el.querySelector('.plk-sound');
+    sb.addEventListener('click', function () { sound = !sound; sb.setAttribute('aria-pressed', sound); sb.textContent = sound ? 'Sound on' : 'Sound off'; });
+    show();
   });
 
   // Lightbox for case-study images
