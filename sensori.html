@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Nunito:wght@700&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Nunito:wght@700;900&family=Caveat:wght@500&family=Press+Start+2P&display=swap">
 <style>/* Layout: one wide left-aligned column; the project index is the page's single bold element, and each project owns a signature colour carried over from the original tiles. */
 :root {
   --paper: #fbfbfc;
@@ -458,6 +458,66 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .cmp-labels em { font-style: normal; color: var(--ink); font-weight: 500; }
 .cmp-line::after { width: 36px; height: 36px; margin: -18px 0 0 -18px; }
 .cmp-line::before { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); z-index: 1; color: var(--fg); font: 600 15px/1 var(--body); letter-spacing: 3px; white-space: nowrap; padding-left: 3px; }
+
+/* Shared case-study components, used across every project */
+.aisteps.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.aisteps.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.strip.wide { grid-auto-columns: max-content; gap: 16px; }
+.strip.wide img { height: clamp(200px, 30vw, 320px); width: auto; max-width: none; border: 1px solid var(--line); border-radius: 6px; background: var(--raised); }
+.strip.wide figcaption { max-width: 40ch; }
+.compare-wrap.wide { max-width: none; justify-self: stretch; margin-top: 28px; }
+.compare.wide { border-radius: 8px; aspect-ratio: 2500 / 1778; border: 1px solid var(--line); }
+.compare.wide > img, .compare.wide .cmp-top img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.chapter:not(#app) > .viewer { margin: 28px auto 0; }
+.chapter > .principles + .media, .chapter > .stats + .principles { margin-top: 36px; }
+@media (max-width: 900px) { .aisteps.n3, .aisteps.n5 { grid-template-columns: minmax(0, 1fr); } }
+
+/* Pixel art */
+.pix { image-rendering: pixelated; image-rendering: crisp-edges; }
+.marquee.pixrow li { width: 120px; }
+.marquee.pixrow img { width: 120px; padding: 14%; background: var(--raised); }
+.jars { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.jars li { display: grid; justify-items: center; gap: 6px; text-align: center; padding: 18px 8px 14px; background: #0b1f44; border-radius: 8px; color: #fff; }
+.jars img { width: 66px; height: auto; }
+.jars b { font: 400 13px/1.3 "Press Start 2P", ui-monospace, monospace; color: #fff3d1; margin-top: 4px; }
+.jars span { font: 400 9px/1.4 "Press Start 2P", ui-monospace, monospace; color: #ffd447; }
+@media (max-width: 700px) { .jars { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 120px; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding-bottom: 8px; } .jars li { scroll-snap-align: start; } }
+
+/* Plinklet device demo */
+.plk { margin-top: 32px; display: grid; justify-items: center; gap: 20px; }
+.plk-shell { width: min(100%, 520px); background: #9edfd2; border-radius: 34px; padding: 22px 22px 16px; box-shadow: inset 0 -6px 0 rgba(11, 31, 68, .14), 0 18px 40px -22px rgba(11, 31, 68, .45); }
+.plk-screen { position: relative; aspect-ratio: 4 / 3; background: #0b1f44; border-radius: 12px; overflow: hidden; border: 8px solid #0b1f44; box-sizing: content-box; width: calc(100% - 16px); }
+.plk-s { position: absolute; left: 0; top: 0; width: 320px; height: 240px; transform-origin: 0 0; }
+.plk-s > * { position: absolute; }
+.plk-s .b { display: block; }
+.plk-bg { left: 0; top: 0; width: 320px; height: 240px; }
+.plk-goal { left: 4px; top: 40px; width: 144px; height: 144px; }
+.plk-jar { left: 210px; top: 14px; width: 88px; height: 108px; }
+.px { font-family: "Press Start 2P", ui-monospace, monospace; text-align: center; white-space: nowrap; }
+.plk-tag { left: 112px; top: 35px; width: 80px; font-size: 16px; line-height: 18px; color: #0b1f44; }
+.plk-amt { left: 202px; top: 130px; width: 104px; font-size: 24px; line-height: 26px; color: #0b1f44; }
+.plk-amt.sm { top: 134px; font-size: 16px; line-height: 18px; }
+.plk-cheer { left: 0; top: 200px; width: 320px; font-size: 24px; line-height: 26px; color: #ffd447; }
+.plk.done .plk-cheer { animation: plk-blink .5s steps(2) 6; }
+.plk-sent { left: 0; top: 0; width: 320px; padding: 8px 0; font-size: 12px; line-height: 14px; color: #0b1f44; background: #ffd447; }
+.plk-sent.pop { animation: plk-drop .3s steps(4) both; }
+@keyframes plk-drop { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes plk-blink { 50% { opacity: 0; } }
+.plk-btns { display: flex; justify-content: center; gap: 22%; margin-top: 14px; }
+.plk-btns i { width: 44px; height: 12px; border-radius: 6px; background: #f2f6f5; box-shadow: 0 3px 0 rgba(11, 31, 68, .18); }
+.plk-ctrl { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.plk-ctrl button { font: 600 15px/1 var(--body); min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: #0b1f44; color: #fff; cursor: pointer; transition: transform .15s ease, opacity .2s; }
+.plk-ctrl button:hover:not(:disabled) { transform: translateY(-2px); }
+.plk-ctrl button:disabled { opacity: .35; cursor: default; }
+.plk-ctrl .plk-reset { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { .plk.done .plk-cheer, .plk-sent.pop { animation: none; } }
+.aisteps li, .principles li { align-content: start; }
+
+/* Product logo sitting in the open space of a hero photo */
+.case-hero { position: relative; }
+.hero-logo { position: absolute; left: max(var(--gutter, 24px), 6vw); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: .28em; font: 900 clamp(34px, 6.4vw, 104px)/1 "Nunito", "Inter", sans-serif; letter-spacing: -0.03em; color: #0b1f44; pointer-events: none; }
+.case-hero .hero-logo img { width: 1.05em; height: auto; max-height: none; object-fit: contain; animation: none; filter: drop-shadow(0 .06em .12em rgba(11, 31, 68, .18)); }
+@media (max-width: 600px) { .hero-logo { top: 16%; transform: none; } }
 </style>
 </head>
 <body>
@@ -529,18 +589,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
         <div class="media">
           <figure><img src="images/sensori/wf/ia.jpg" width="2400" height="1218" alt="Information architecture: eight flows and 41 screens" loading="lazy"><figcaption>The information architecture. Click to enlarge.</figcaption></figure>
         </div>
-        <div class="strip-wrap"><div class="strip" tabindex="0" aria-label="Wireframes, scroll sideways"><figure><img src="images/sensori/wf/on-02.png" width="560" height="1213" alt="Wireframe ON-02: Honest expectations" loading="lazy"><figcaption><code>ON-02</code> Honest expectations</figcaption></figure><figure><img src="images/sensori/wf/on-03.png" width="560" height="1213" alt="Wireframe ON-03: The privacy promise" loading="lazy"><figcaption><code>ON-03</code> The privacy promise</figcaption></figure><figure><img src="images/sensori/wf/cp-01.png" width="560" height="1213" alt="Wireframe CP-01: No diagnosis asked" loading="lazy"><figcaption><code>CP-01</code> No diagnosis asked</figcaption></figure><figure><img src="images/sensori/wf/hm-01.png" width="560" height="1213" alt="Wireframe HM-01: The learning week" loading="lazy"><figcaption><code>HM-01</code> The learning week</figcaption></figure><figure><img src="images/sensori/wf/hm-04.png" width="560" height="1213" alt="Wireframe HM-04: A key moment" loading="lazy"><figcaption><code>HM-04</code> A key moment</figcaption></figure><figure><img src="images/sensori/wf/hm-06.png" width="560" height="1213" alt="Wireframe HM-06: Notifications, in final words" loading="lazy"><figcaption><code>HM-06</code> Notifications, in final words</figcaption></figure><figure><img src="images/sensori/wf/em-01.png" width="560" height="1213" alt="Wireframe EM-01: The day’s timeline" loading="lazy"><figcaption><code>EM-01</code> The day’s timeline</figcaption></figure><figure><img src="images/sensori/wf/st-06.png" width="560" height="1213" alt="Wireframe ST-06: Privacy and data" loading="lazy"><figcaption><code>ST-06</code> Privacy and data</figcaption></figure></div><p class="hint">Scroll sideways for more</p></div>
+        <div class="strip-wrap"><div class="strip" tabindex="0" aria-label="Images, scroll sideways"><figure><img src="images/sensori/wf/on-02.png" width="560" height="1213" alt="Wireframe ON-02: Honest expectations" loading="lazy"><figcaption><code>ON-02</code> Honest expectations</figcaption></figure><figure><img src="images/sensori/wf/on-03.png" width="560" height="1213" alt="Wireframe ON-03: The privacy promise" loading="lazy"><figcaption><code>ON-03</code> The privacy promise</figcaption></figure><figure><img src="images/sensori/wf/cp-01.png" width="560" height="1213" alt="Wireframe CP-01: No diagnosis asked" loading="lazy"><figcaption><code>CP-01</code> No diagnosis asked</figcaption></figure><figure><img src="images/sensori/wf/hm-01.png" width="560" height="1213" alt="Wireframe HM-01: The learning week" loading="lazy"><figcaption><code>HM-01</code> The learning week</figcaption></figure><figure><img src="images/sensori/wf/hm-04.png" width="560" height="1213" alt="Wireframe HM-04: A key moment" loading="lazy"><figcaption><code>HM-04</code> A key moment</figcaption></figure><figure><img src="images/sensori/wf/hm-06.png" width="560" height="1213" alt="Wireframe HM-06: Notifications, in final words" loading="lazy"><figcaption><code>HM-06</code> Notifications, in final words</figcaption></figure><figure><img src="images/sensori/wf/em-01.png" width="560" height="1213" alt="Wireframe EM-01: The day’s timeline" loading="lazy"><figcaption><code>EM-01</code> The day’s timeline</figcaption></figure><figure><img src="images/sensori/wf/st-06.png" width="560" height="1213" alt="Wireframe ST-06: Privacy and data" loading="lazy"><figcaption><code>ST-06</code> Privacy and data</figcaption></figure></div><p class="hint">Scroll sideways for more</p></div>
       </section>
 
       <section id="ai" class="chapter">
         <h2>Built with Claude, checked by experts</h2>
-        <ol class="aisteps"><li><b>Research</b><span>Checked all 22 sensory activities against NHS and RCOT guidance. 13 safety and wording changes followed.</span></li><li><b>Challenge</b><span>Pressure-tested decisions against the medical-device line, privacy and the voice rules.</span></li><li><b>Build</b><span>The wireframes, the working prototype and the website, all built with Claude.</span></li><li><b>Test</b><span>Every app state, from day one to a band left off, clickable end to end.</span></li></ol>
+        <ol class="aisteps n4"><li><b>Research</b><span>Checked all 22 sensory activities against NHS and RCOT guidance. 13 safety and wording changes followed.</span></li><li><b>Challenge</b><span>Pressure-tested decisions against the medical-device line, privacy and the voice rules.</span></li><li><b>Build</b><span>The wireframes, the working prototype and the website, all built with Claude.</span></li><li><b>Test</b><span>Every app state, from day one to a band left off, clickable end to end.</span></li></ol>
         <p class="note">Claude’s research speeds up the occupational therapist’s review. It doesn’t replace it.</p>
       </section>
 
       <section id="app" class="chapter">
         <h2>From wireframe to finished app</h2>
-        <div class="compare-wrap"><div class="compare" style="--pos:50%"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Home, finished"><div class="cmp-top"><img src="images/sensori/wf/hm-01-compare.png" width="600" height="1261" alt="Home, wireframe"></div><span class="cmp-line" aria-hidden="true"></span><input type="range" min="0" max="100" value="50" aria-label="Compare the wireframe with the finished screen"></div><div class="cmp-labels"><span>Wireframe</span><em>Drag to compare</em><span>Finished</span></div></div>
+        <div class="compare-wrap"><div class="compare" style="--pos:50%"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Finished"><div class="cmp-top"><img src="images/sensori/wf/hm-01-compare.png" width="600" height="1261" alt="Wireframe"></div><span class="cmp-line" aria-hidden="true"></span><input type="range" min="0" max="100" value="50" aria-label="Compare the wireframe with the finished screen"></div><div class="cmp-labels"><span>Wireframe</span><em>Drag to compare</em><span>Finished</span></div></div>
         <div class="viewer"><div class="v-side"><div class="v-tabs" role="tablist" aria-label="App screens"><button type="button" role="tab" aria-selected="true" data-i="0">Today</button><button type="button" role="tab" aria-selected="false" data-i="1">Emotions</button><button type="button" role="tab" aria-selected="false" data-i="2">Help now</button><button type="button" role="tab" aria-selected="false" data-i="3">Breathe</button><button type="button" role="tab" aria-selected="false" data-i="4">Sleep</button><button type="button" role="tab" aria-selected="false" data-i="5">Settings</button></div><div class="v-caps" aria-live="polite"><p class="on" data-i="0">How are things going today? The answer, at a glance.</p><p class="" data-i="1">A gentle read of the day, in words like “seems” and “may”.</p><p class="" data-i="2">Two or three ideas to try, and the ones that helped before come first.</p><p class="" data-i="3">Breathing together earns a star that’s never taken away.</p><p class="" data-i="4">Compared with what’s usual for the child, not a target.</p><p class="" data-i="5">One child per account, and data stored only on the parent’s phone.</p></div></div><div class="v-phone"><img src="images/sensori/m-home.png" width="600" height="1261" alt="Today screen" class="on" data-i="0" loading="lazy"><img src="images/sensori/m-emotions.png" width="600" height="1261" alt="Emotions screen" class="" data-i="1" loading="lazy"><img src="images/sensori/m-activities.png" width="600" height="1261" alt="Help now screen" class="" data-i="2" loading="lazy"><img src="images/sensori/m-breathe.png" width="600" height="1261" alt="Breathe screen" class="" data-i="3" loading="lazy"><img src="images/sensori/m-sleep.png" width="600" height="1261" alt="Sleep screen" class="" data-i="4" loading="lazy"><img src="images/sensori/m-settings.png" width="600" height="1261" alt="Settings screen" class="" data-i="5" loading="lazy"></div></div>
       </section>
 
@@ -727,6 +787,35 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     });
     window.addEventListener('pointerup', function () { if (!down) return; down = false; s.classList.remove('dragging'); });
     s.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+  });
+
+  // Plinklet: a working copy of the device's goal screen. Add money and watch the jar fill.
+  document.querySelectorAll('.plk').forEach(function (el) {
+    var price = +el.dataset.price, start = +el.dataset.saved, saved = start, base = el.dataset.jar;
+    var scr = el.querySelector('.plk-screen'), s = el.querySelector('.plk-s');
+    var jar = el.querySelector('.plk-jar'), amt = el.querySelector('.plk-amt'), cheerEl = el.querySelector('.plk-cheer'), sent = el.querySelector('.plk-sent');
+    var adds = el.querySelectorAll('[data-add]'), sentTimer;
+    for (var i = 0; i <= 10; i++) { var im = new Image(); im.src = base + i + '.png'; }
+    function fit() { s.style.transform = 'scale(' + (scr.clientWidth / 320) + ')'; }
+    fit(); if ('ResizeObserver' in window) new ResizeObserver(fit).observe(scr); else window.addEventListener('resize', fit);
+    function cheer(c) { return c === 0 ? "LET'S GO!" : c <= 4 ? 'KEEP GOING!' : c === 5 ? 'HALFWAY!' : c <= 7 ? 'OVER HALFWAY!' : c <= 9 ? 'NEARLY THERE!' : 'YOU DID IT!'; }
+    function render() {
+      var c = Math.min(10, Math.floor(saved * 10 / price)), t = '£' + saved;
+      jar.src = base + c + '.png'; amt.textContent = t; amt.classList.toggle('sm', t.length > 4); cheerEl.textContent = cheer(c);
+      el.classList.toggle('done', saved >= price);
+      adds.forEach(function (b) { b.disabled = saved >= price; });
+    }
+    adds.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var n = +b.dataset.add; saved = Math.min(price, saved + n);
+        sent.textContent = b.dataset.from.toUpperCase() + ' SENT £' + n + '!'; sent.hidden = false;
+        sent.classList.remove('pop'); void sent.offsetWidth; sent.classList.add('pop');
+        clearTimeout(sentTimer); sentTimer = setTimeout(function () { sent.hidden = true; }, 1800);
+        render();
+      });
+    });
+    el.querySelector('[data-reset]').addEventListener('click', function () { saved = start; sent.hidden = true; render(); });
+    render();
   });
 
   // Lightbox for case-study images
