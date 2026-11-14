@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BP Castrol — Amrit Singh Bhogal</title>
-<meta name="description" content="A 2030 experience vision for Castrol's business customers.">
+<meta name="description" content="A 2030 experience vision for Castrol’s business customers, from first research to a working dashboard.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -444,6 +444,79 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 .v-phone { width: 100%; justify-self: center; }
 .v-caps { margin-bottom: 4px; }
+/* App chapter: two phones the same size, tops aligned, controls underneath */
+#app.chapter { align-items: start; }
+.compare-wrap, .viewer { max-width: 300px; width: 100%; justify-self: center; }
+.viewer { display: flex; flex-direction: column; gap: 14px; }
+.viewer .v-phone { order: 1; max-width: none; }
+.viewer .v-side { order: 2; display: grid; gap: 10px; }
+.v-tabs { justify-content: center; }
+.v-tabs button { padding: 8px 12px; font-size: 13px; }
+.v-caps p { text-align: center; min-height: 2.8em; font-size: 14px; }
+.cmp-labels { align-items: baseline; font-size: 13px; }
+.cmp-labels em { font-style: normal; color: var(--ink); font-weight: 500; }
+.cmp-line::after { width: 36px; height: 36px; margin: -18px 0 0 -18px; }
+.cmp-line::before { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); z-index: 1; color: var(--fg); font: 600 15px/1 var(--body); letter-spacing: 3px; white-space: nowrap; padding-left: 3px; }
+
+/* Shared case-study components, used across every project */
+.aisteps.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.aisteps.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.strip.wide { grid-auto-columns: max-content; gap: 16px; }
+.strip.wide img { height: clamp(200px, 30vw, 320px); width: auto; max-width: none; border: 1px solid var(--line); border-radius: 6px; background: var(--raised); }
+.strip.wide figcaption { max-width: 40ch; }
+.compare-wrap.wide { max-width: none; justify-self: stretch; margin-top: 28px; }
+.compare.wide { border-radius: 8px; aspect-ratio: 2500 / 1778; border: 1px solid var(--line); }
+.compare.wide > img, .compare.wide .cmp-top img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.chapter:not(#app) > .viewer { margin: 28px auto 0; }
+.chapter > .principles + .media, .chapter > .stats + .principles { margin-top: 36px; }
+@media (max-width: 900px) { .aisteps.n3, .aisteps.n5 { grid-template-columns: minmax(0, 1fr); } }
+
+/* Pixel art */
+.pix { image-rendering: pixelated; image-rendering: crisp-edges; }
+.marquee.pixrow li { width: 120px; }
+.marquee.pixrow img { width: 120px; padding: 14%; background: var(--raised); }
+.jars { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.jars li { display: grid; justify-items: center; gap: 6px; text-align: center; padding: 18px 8px 14px; background: #0b1f44; border-radius: 8px; color: #fff; }
+.jars img { width: 66px; height: auto; }
+.jars b { font: 400 13px/1.3 "Press Start 2P", ui-monospace, monospace; color: #fff3d1; margin-top: 4px; }
+.jars span { font: 400 9px/1.4 "Press Start 2P", ui-monospace, monospace; color: #ffd447; }
+@media (max-width: 700px) { .jars { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 120px; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding-bottom: 8px; } .jars li { scroll-snap-align: start; } }
+
+/* Plinklet device demo */
+.plk { margin-top: 32px; display: grid; justify-items: center; gap: 20px; }
+.plk-shell { width: min(100%, 520px); background: #9edfd2; border-radius: 34px; padding: 22px 22px 16px; box-shadow: inset 0 -6px 0 rgba(11, 31, 68, .14), 0 18px 40px -22px rgba(11, 31, 68, .45); }
+.plk-screen { position: relative; aspect-ratio: 4 / 3; background: #0b1f44; border-radius: 12px; overflow: hidden; border: 8px solid #0b1f44; box-sizing: content-box; width: calc(100% - 16px); }
+.plk-s { position: absolute; left: 0; top: 0; width: 320px; height: 240px; transform-origin: 0 0; }
+.plk-s > * { position: absolute; }
+.plk-s .b { display: block; }
+.plk-bg { left: 0; top: 0; width: 320px; height: 240px; }
+.plk-goal { left: 4px; top: 40px; width: 144px; height: 144px; }
+.plk-jar { left: 210px; top: 14px; width: 88px; height: 108px; }
+.px { font-family: "Press Start 2P", ui-monospace, monospace; text-align: center; white-space: nowrap; }
+.plk-tag { left: 112px; top: 35px; width: 80px; font-size: 16px; line-height: 18px; color: #0b1f44; }
+.plk-amt { left: 202px; top: 130px; width: 104px; font-size: 24px; line-height: 26px; color: #0b1f44; }
+.plk-amt.sm { top: 134px; font-size: 16px; line-height: 18px; }
+.plk-cheer { left: 0; top: 200px; width: 320px; font-size: 24px; line-height: 26px; color: #ffd447; }
+.plk.done .plk-cheer { animation: plk-blink .5s steps(2) 6; }
+.plk-sent { left: 0; top: 0; width: 320px; padding: 8px 0; font-size: 12px; line-height: 14px; color: #0b1f44; background: #ffd447; }
+.plk-sent.pop { animation: plk-drop .3s steps(4) both; }
+@keyframes plk-drop { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes plk-blink { 50% { opacity: 0; } }
+.plk-btns { display: flex; justify-content: center; gap: 22%; margin-top: 14px; }
+.plk-btns i { width: 44px; height: 12px; border-radius: 6px; background: #f2f6f5; box-shadow: 0 3px 0 rgba(11, 31, 68, .18); }
+.plk-ctrl { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.plk-ctrl button { font: 600 15px/1 var(--body); min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: #0b1f44; color: #fff; cursor: pointer; transition: transform .15s ease, opacity .2s; }
+.plk-ctrl button:hover:not(:disabled) { transform: translateY(-2px); }
+.plk-ctrl button:disabled { opacity: .35; cursor: default; }
+.plk-ctrl .plk-reset { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { .plk.done .plk-cheer, .plk-sent.pop { animation: none; } }
+.aisteps li, .principles li { align-content: start; }
+
+/* Product logo sitting in the open space of a hero photo */
+.case-hero { position: relative; }
+.hero-logo { position: absolute; left: max(var(--gutter, 24px), 6vw); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: .28em; font: 900 clamp(34px, 6.4vw, 104px)/1 "Nunito", "Inter", sans-serif; letter-spacing: -0.03em; color: #0b1f44; pointer-events: none; }
+.case-hero .hero-logo img { width: 1.05em; height: auto; max-height: none; object-fit: contain; animation: none; filter: drop-shadow(0 .06em .12em rgba(11, 31, 68, .18)); }
+@media (max-width: 600px) { .hero-logo { top: 16%; transform: none; } }
 </style>
 </head>
 <body>
@@ -472,9 +545,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     </dl>
   </section>
 
-  <div class="case-hero"><img src="images/1695726605992-bp_banner.png" alt="A bp service station at dusk" width="1722" height="623"></div>
+  <div class="case-hero"><img src="images/1695726605992-bp_banner.png" width="1722" height="623" alt="A bp service station at dusk"></div>
 
-  <section class="goal wrap" aria-label="Project goal">
+  <section class="goal wrap" aria-label="The brief">
     <blockquote>Accelerate service, maintenance and value-based offers by thinking beyond physical products.</blockquote>
     <p>The brief</p>
   </section>
@@ -482,72 +555,60 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   <div class="case-body wrap">
     <nav class="steps" aria-label="Case study sections">
       <ol>
-        <li><a href="#approach">Approach</a></li>
         <li><a href="#research">Research</a></li>
+        <li><a href="#approach">Approach</a></li>
         <li><a href="#pain-points">Pain points</a></li>
-        <li><a href="#design">Design and testing</a></li>
+        <li><a href="#design">Design</a></li>
         <li><a href="#outcome">Outcome</a></li>
       </ol>
       <div class="bar" aria-hidden="true"><span></span></div>
     </nav>
 
     <div>
-      <section id="approach" class="chapter">
-        <h2>A human-centred process, end to end</h2>
-        <p>Every stage was hands-on and built around the people using the product: discover, define, ideate, prototype and test, then loop back with what we learned. We planned the work as an eight-week sprint from kick-off to user testing.</p>
-        <div class="media">
-          <figure><img src="images/4b79a61b-25b2-methodology_1.png" alt="Diagram of the five-stage process: discover, define, ideate, prototype, test" loading="lazy" width="2500" height="980"><figcaption>The design process, with feedback loops between stages.</figcaption></figure>
-          <figure><img src="images/1d63ba14-6227-timeline_1.png" alt="Eight-week timeline from ramp-up to user testing" loading="lazy" width="2500" height="688"><figcaption>The eight-week plan.</figcaption></figure>
-        </div>
-      </section>
-
       <section id="research" class="chapter">
         <h2>45 hours of listening first</h2>
         <p>Before designing anything, we spoke to Castrol’s customers and to the people inside Castrol who serve them.</p>
         <div class="stats">
-          <div class="stat"><span class="stat-n" data-count="65">65</span><span class="stat-label">Customers</span><p>From six segments: independent and franchise workshops, commercial vehicle oils, distributors, retail and mining.</p></div>
-          <div class="stat"><span class="stat-n" data-count="15">15</span><span class="stat-label">Castrol stakeholders</span><p>From sales, customer operations, technical support, marketing and supply chain.</p></div>
-          <div class="stat"><span class="stat-n" data-count="45" data-suffix="+">45+</span><span class="stat-label">Hours of research</span><p>Qualitative interviews, from inside Castrol and from its customers.</p></div>
+          <div class="stat"><span class="stat-n" data-count="65" data-suffix="">65</span><span class="stat-label">Customers</span><p>From six segments, from workshops and distributors to retail and mining.</p></div>
+          <div class="stat"><span class="stat-n" data-count="15" data-suffix="">15</span><span class="stat-label">Castrol stakeholders</span><p>From sales, operations, technical support, marketing and supply chain.</p></div>
+          <div class="stat"><span class="stat-n" data-count="45" data-suffix="+">45+</span><span class="stat-label">Hours of research</span><p>Qualitative interviews, inside and outside Castrol.</p></div>
+        </div>
+      </section>
+
+      <section id="approach" class="chapter">
+        <h2>An eight-week sprint, end to end</h2>
+        <ol class="aisteps n5"><li><b>Discover</b><span>Interviews with customers and Castrol teams.</span></li><li><b>Define</b><span>A ranked list of customer pain points.</span></li><li><b>Ideate</b><span>Ideas aimed at the problems ranked highest.</span></li><li><b>Prototype</b><span>The journeys customers valued most, as low-fidelity prototypes.</span></li><li><b>Test</b><span>Sessions with users, then another loop with what we learned.</span></li></ol>
+        <div class="media">
+          <figure><img src="images/1d63ba14-6227-timeline_1.png" width="2500" height="688" alt="Eight-week timeline from ramp-up to user testing" loading="lazy"></figure>
         </div>
       </section>
 
       <section id="pain-points" class="chapter">
         <h2>Ranking what hurts most</h2>
-        <p>We turned the research into a ranked list of customer problems. Stock visibility, labour shortages and supply topped it, and that list set the agenda for ideation.</p>
+        <p>Stock visibility, labour shortages and supply topped the list, and that set the agenda for ideation.</p>
         <div class="media">
-          <figure><img src="images/5da51a3f-1a95-painpoints_1.png" alt="Pain point hotspot rankings, led by stock visibility, labour shortage and lack of supply" loading="lazy" width="2398" height="1782"></figure>
+          <figure><img src="images/5da51a3f-1a95-painpoints_1.png" width="2398" height="1782" alt="Pain point hotspot rankings, led by stock visibility, labour shortage and lack of supply" loading="lazy"></figure>
         </div>
       </section>
 
       <section id="design" class="chapter">
         <h2>Wireframes in front of users, fast</h2>
-        <p>We wireframed the journeys customers valued most, turned them into low-fidelity prototypes and tested them with users. Their feedback drove several rounds of iteration.</p>
-        <div class="media two">
-          <figure><img src="images/08c69303-d36d-dashboard-copy-2x.png" alt="Wireframe of the dashboard" loading="lazy" width="2732" height="2048"></figure>
-          <figure><img src="images/be52bdf5-2313-customer-service-promo-removed-2x.png" alt="Wireframe of the customer service screen" loading="lazy" width="2732" height="2048"></figure>
-          <figure><img src="images/73d5197f-1d37-insights-2x.png" alt="Wireframe of the insights screen" loading="lazy" width="2732" height="2048"></figure>
-          <figure><img src="images/333eaea1-67c7-orders-dispatched-2x.png" alt="Wireframe of the dispatched orders screen" loading="lazy" width="2732" height="2048"></figure>
-        </div>
+        <p>We wireframed the most valued journeys and tested them with users. Their feedback drove several rounds of iteration.</p>
+        <div class="strip-wrap"><div class="strip wide" tabindex="0" aria-label="Images, scroll sideways"><figure><img src="images/08c69303-d36d-dashboard-copy-2x.png" width="2500" height="1874" alt="Dashboard" loading="lazy"><figcaption>Dashboard</figcaption></figure><figure><img src="images/be52bdf5-2313-customer-service-promo-removed-2x.png" width="2500" height="1874" alt="Customer service" loading="lazy"><figcaption>Customer service</figcaption></figure><figure><img src="images/73d5197f-1d37-insights-2x.png" width="2500" height="1874" alt="Insights" loading="lazy"><figcaption>Insights</figcaption></figure><figure><img src="images/333eaea1-67c7-orders-dispatched-2x.png" width="2500" height="1874" alt="Dispatched orders" loading="lazy"><figcaption>Dispatched orders</figcaption></figure></div><p class="hint">Scroll sideways for more</p></div>
       </section>
 
       <section id="outcome" class="chapter">
         <h2>One dashboard for the whole business</h2>
-        <p>The result is a dashboard for monitoring live commerce. It combines real-time and historical data so the business can sharpen its strategy and improve agent performance, on desktop, tablet and phone.</p>
-        <div class="media">
-          <figure><img src="images/ad336a34-88a2-castrol-portal---desktop---dashboard---dark-mode.png" alt="Castrol portal dashboard in dark mode, with orders, inventory and notifications" loading="lazy" width="2500" height="1778"></figure>
-          <figure><img src="images/a24cb0be-f23c-castrol-portal---desktop---orders---dark-mode.png" alt="Castrol portal orders screen with a live delivery map" loading="lazy" width="2500" height="1778"></figure>
-          <figure><img src="images/f8410397-54a8-ipad_1.png" alt="The Castrol portal on a tablet" loading="lazy" width="2500" height="1364"></figure>
-        </div>
-        <div class="media phones">
-          <figure><img src="images/770d12bc-af26-castrol-portal---mobile---dashboard---dark-mode.png" alt="Mobile dashboard" loading="lazy" width="780" height="1688"></figure>
-          <figure><img src="images/07ac19c9-6fc9-castrol-portal---mobile---orders---dark-mode.png" alt="Mobile orders screen" loading="lazy" width="780" height="1688"></figure>
-        </div>
+        <p>Live orders, inventory and alerts in one place, combining real-time and historical data, on desktop, tablet and phone.</p>
+        <div class="compare-wrap wide"><div class="compare wide" style="--pos:50%"><img src="images/ad336a34-88a2-castrol-portal---desktop---dashboard---dark-mode.png" width="2500" height="1778" alt="Finished"><div class="cmp-top"><img src="images/08c69303-d36d-dashboard-copy-2x.png" width="2500" height="1874" alt="Wireframe"></div><span class="cmp-line" aria-hidden="true"></span><input type="range" min="0" max="100" value="50" aria-label="Compare the wireframe with the finished screen"></div><div class="cmp-labels"><span>Wireframe</span><em>Drag to compare</em><span>Finished</span></div></div>
+        <div class="strip-wrap"><div class="strip wide" tabindex="0" aria-label="Images, scroll sideways"><figure><img src="images/a24cb0be-f23c-castrol-portal---desktop---orders---dark-mode.png" width="2500" height="1778" alt="Orders with live delivery map" loading="lazy"><figcaption>Orders with live delivery map</figcaption></figure><figure><img src="images/f8410397-54a8-ipad_1.png" width="2500" height="1364" alt="Tablet" loading="lazy"><figcaption>Tablet</figcaption></figure><figure><img src="images/770d12bc-af26-castrol-portal---mobile---dashboard---dark-mode.png" width="780" height="1688" alt="Mobile dashboard" loading="lazy"><figcaption>Mobile dashboard</figcaption></figure><figure><img src="images/07ac19c9-6fc9-castrol-portal---mobile---orders---dark-mode.png" width="780" height="1688" alt="Mobile orders" loading="lazy"><figcaption>Mobile orders</figcaption></figure></div><p class="hint">Scroll sideways for more</p></div>
       </section>
+
     </div>
   </div>
 
-  <a class="next" href="bp-core.html" style="--c:#c9cac9;--fg:#17191e">
-    <div class="wrap"><span>Next project</span><strong style="view-transition-name: t-bp-core">BP Core</strong></div>
+  <a class="next" href="plinklet.html" style="--c:#ffd447;--fg:#0b1f44">
+    <div class="wrap"><span>Next project</span><strong style="view-transition-name: t-plinklet">Plinklet</strong></div>
   </a>
 </main>
 
@@ -726,6 +787,35 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     });
     window.addEventListener('pointerup', function () { if (!down) return; down = false; s.classList.remove('dragging'); });
     s.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+  });
+
+  // Plinklet: a working copy of the device's goal screen. Add money and watch the jar fill.
+  document.querySelectorAll('.plk').forEach(function (el) {
+    var price = +el.dataset.price, start = +el.dataset.saved, saved = start, base = el.dataset.jar;
+    var scr = el.querySelector('.plk-screen'), s = el.querySelector('.plk-s');
+    var jar = el.querySelector('.plk-jar'), amt = el.querySelector('.plk-amt'), cheerEl = el.querySelector('.plk-cheer'), sent = el.querySelector('.plk-sent');
+    var adds = el.querySelectorAll('[data-add]'), sentTimer;
+    for (var i = 0; i <= 10; i++) { var im = new Image(); im.src = base + i + '.png'; }
+    function fit() { s.style.transform = 'scale(' + (scr.clientWidth / 320) + ')'; }
+    fit(); if ('ResizeObserver' in window) new ResizeObserver(fit).observe(scr); else window.addEventListener('resize', fit);
+    function cheer(c) { return c === 0 ? "LET'S GO!" : c <= 4 ? 'KEEP GOING!' : c === 5 ? 'HALFWAY!' : c <= 7 ? 'OVER HALFWAY!' : c <= 9 ? 'NEARLY THERE!' : 'YOU DID IT!'; }
+    function render() {
+      var c = Math.min(10, Math.floor(saved * 10 / price)), t = '£' + saved;
+      jar.src = base + c + '.png'; amt.textContent = t; amt.classList.toggle('sm', t.length > 4); cheerEl.textContent = cheer(c);
+      el.classList.toggle('done', saved >= price);
+      adds.forEach(function (b) { b.disabled = saved >= price; });
+    }
+    adds.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var n = +b.dataset.add; saved = Math.min(price, saved + n);
+        sent.textContent = b.dataset.from.toUpperCase() + ' SENT £' + n + '!'; sent.hidden = false;
+        sent.classList.remove('pop'); void sent.offsetWidth; sent.classList.add('pop');
+        clearTimeout(sentTimer); sentTimer = setTimeout(function () { sent.hidden = true; }, 1800);
+        render();
+      });
+    });
+    el.querySelector('[data-reset]').addEventListener('click', function () { saved = start; sent.hidden = true; render(); });
+    render();
   });
 
   // Lightbox for case-study images

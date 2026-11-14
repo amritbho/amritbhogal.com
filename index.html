@@ -444,6 +444,79 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 .v-phone { width: 100%; justify-self: center; }
 .v-caps { margin-bottom: 4px; }
+/* App chapter: two phones the same size, tops aligned, controls underneath */
+#app.chapter { align-items: start; }
+.compare-wrap, .viewer { max-width: 300px; width: 100%; justify-self: center; }
+.viewer { display: flex; flex-direction: column; gap: 14px; }
+.viewer .v-phone { order: 1; max-width: none; }
+.viewer .v-side { order: 2; display: grid; gap: 10px; }
+.v-tabs { justify-content: center; }
+.v-tabs button { padding: 8px 12px; font-size: 13px; }
+.v-caps p { text-align: center; min-height: 2.8em; font-size: 14px; }
+.cmp-labels { align-items: baseline; font-size: 13px; }
+.cmp-labels em { font-style: normal; color: var(--ink); font-weight: 500; }
+.cmp-line::after { width: 36px; height: 36px; margin: -18px 0 0 -18px; }
+.cmp-line::before { content: "‹ ›"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); z-index: 1; color: var(--fg); font: 600 15px/1 var(--body); letter-spacing: 3px; white-space: nowrap; padding-left: 3px; }
+
+/* Shared case-study components, used across every project */
+.aisteps.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.aisteps.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.strip.wide { grid-auto-columns: max-content; gap: 16px; }
+.strip.wide img { height: clamp(200px, 30vw, 320px); width: auto; max-width: none; border: 1px solid var(--line); border-radius: 6px; background: var(--raised); }
+.strip.wide figcaption { max-width: 40ch; }
+.compare-wrap.wide { max-width: none; justify-self: stretch; margin-top: 28px; }
+.compare.wide { border-radius: 8px; aspect-ratio: 2500 / 1778; border: 1px solid var(--line); }
+.compare.wide > img, .compare.wide .cmp-top img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.chapter:not(#app) > .viewer { margin: 28px auto 0; }
+.chapter > .principles + .media, .chapter > .stats + .principles { margin-top: 36px; }
+@media (max-width: 900px) { .aisteps.n3, .aisteps.n5 { grid-template-columns: minmax(0, 1fr); } }
+
+/* Pixel art */
+.pix { image-rendering: pixelated; image-rendering: crisp-edges; }
+.marquee.pixrow li { width: 120px; }
+.marquee.pixrow img { width: 120px; padding: 14%; background: var(--raised); }
+.jars { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.jars li { display: grid; justify-items: center; gap: 6px; text-align: center; padding: 18px 8px 14px; background: #0b1f44; border-radius: 8px; color: #fff; }
+.jars img { width: 66px; height: auto; }
+.jars b { font: 400 13px/1.3 "Press Start 2P", ui-monospace, monospace; color: #fff3d1; margin-top: 4px; }
+.jars span { font: 400 9px/1.4 "Press Start 2P", ui-monospace, monospace; color: #ffd447; }
+@media (max-width: 700px) { .jars { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 120px; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding-bottom: 8px; } .jars li { scroll-snap-align: start; } }
+
+/* Plinklet device demo */
+.plk { margin-top: 32px; display: grid; justify-items: center; gap: 20px; }
+.plk-shell { width: min(100%, 520px); background: #9edfd2; border-radius: 34px; padding: 22px 22px 16px; box-shadow: inset 0 -6px 0 rgba(11, 31, 68, .14), 0 18px 40px -22px rgba(11, 31, 68, .45); }
+.plk-screen { position: relative; aspect-ratio: 4 / 3; background: #0b1f44; border-radius: 12px; overflow: hidden; border: 8px solid #0b1f44; box-sizing: content-box; width: calc(100% - 16px); }
+.plk-s { position: absolute; left: 0; top: 0; width: 320px; height: 240px; transform-origin: 0 0; }
+.plk-s > * { position: absolute; }
+.plk-s .b { display: block; }
+.plk-bg { left: 0; top: 0; width: 320px; height: 240px; }
+.plk-goal { left: 4px; top: 40px; width: 144px; height: 144px; }
+.plk-jar { left: 210px; top: 14px; width: 88px; height: 108px; }
+.px { font-family: "Press Start 2P", ui-monospace, monospace; text-align: center; white-space: nowrap; }
+.plk-tag { left: 112px; top: 35px; width: 80px; font-size: 16px; line-height: 18px; color: #0b1f44; }
+.plk-amt { left: 202px; top: 130px; width: 104px; font-size: 24px; line-height: 26px; color: #0b1f44; }
+.plk-amt.sm { top: 134px; font-size: 16px; line-height: 18px; }
+.plk-cheer { left: 0; top: 200px; width: 320px; font-size: 24px; line-height: 26px; color: #ffd447; }
+.plk.done .plk-cheer { animation: plk-blink .5s steps(2) 6; }
+.plk-sent { left: 0; top: 0; width: 320px; padding: 8px 0; font-size: 12px; line-height: 14px; color: #0b1f44; background: #ffd447; }
+.plk-sent.pop { animation: plk-drop .3s steps(4) both; }
+@keyframes plk-drop { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes plk-blink { 50% { opacity: 0; } }
+.plk-btns { display: flex; justify-content: center; gap: 22%; margin-top: 14px; }
+.plk-btns i { width: 44px; height: 12px; border-radius: 6px; background: #f2f6f5; box-shadow: 0 3px 0 rgba(11, 31, 68, .18); }
+.plk-ctrl { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.plk-ctrl button { font: 600 15px/1 var(--body); min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: #0b1f44; color: #fff; cursor: pointer; transition: transform .15s ease, opacity .2s; }
+.plk-ctrl button:hover:not(:disabled) { transform: translateY(-2px); }
+.plk-ctrl button:disabled { opacity: .35; cursor: default; }
+.plk-ctrl .plk-reset { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+@media (prefers-reduced-motion: reduce) { .plk.done .plk-cheer, .plk-sent.pop { animation: none; } }
+.aisteps li, .principles li { align-content: start; }
+
+/* Product logo sitting in the open space of a hero photo */
+.case-hero { position: relative; }
+.hero-logo { position: absolute; left: max(var(--gutter, 24px), 6vw); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: .28em; font: 900 clamp(34px, 6.4vw, 104px)/1 "Nunito", "Inter", sans-serif; letter-spacing: -0.03em; color: #0b1f44; pointer-events: none; }
+.case-hero .hero-logo img { width: 1.05em; height: auto; max-height: none; object-fit: contain; animation: none; filter: drop-shadow(0 .06em .12em rgba(11, 31, 68, .18)); }
+@media (max-width: 600px) { .hero-logo { top: 16%; transform: none; } }
 </style>
 </head>
 <body>
@@ -473,14 +546,21 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       <h2 id="work-title">Selected work</h2>
       <fieldset class="filters">
         <legend>Filter by sector</legend>
-        <button class="chip" type="button" data-filter="all" aria-pressed="true">All<span class="n">6</span></button>
-        <button class="chip" type="button" data-filter="startup" aria-pressed="false">Startups<span class="n">2</span></button>
-        <button class="chip" type="button" data-filter="finance" aria-pressed="false">Financial services<span class="n">2</span></button>
-        <button class="chip" type="button" data-filter="energy" aria-pressed="false">Energy<span class="n">2</span></button>
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">All<span class="n">5</span></button>
+        <button class="chip" type="button" data-filter="startup" aria-pressed="false">Startups<span class="n">3</span></button>
+        <button class="chip" type="button" data-filter="finance" aria-pressed="false">Financial services<span class="n">1</span></button>
+        <button class="chip" type="button" data-filter="energy" aria-pressed="false">Energy<span class="n">1</span></button>
       </fieldset>
     </div>
 
     <ul class="projects">
+      <li class="project" data-sector="startup" style="--c:#ffd447;--fg:#0b1f44">
+        <a href="plinklet.html" data-img="images/plinklet/plinklet-hero.jpg">
+          <span class="project-name"><span class="pn" style="view-transition-name: t-plinklet">Plinklet</span><span class="project-line">A little screen on a child’s shelf that shows how close they are to their savings goal.</span></span>
+          <span class="project-meta"><span class="project-sector">Plinklet</span><span class="project-role">Founder / Product Designer</span></span>
+          <span class="project-thumb"><img src="images/plinklet/plinklet-hero.jpg" width="2400" height="1200" alt="" loading="lazy"></span>
+        </a>
+      </li>
       <li class="project" data-sector="startup" style="--c:#6a4fc2;--fg:#ffffff">
         <a href="sensori.html" data-img="images/sensori-band.jpg">
           <span class="project-name"><span class="pn" style="view-transition-name: t-sensori">Sensori Band</span><span class="project-line">A soft wristband and parent app that turns heart rate, movement and sleep into a simple picture of a child’s day.</span></span>
@@ -498,7 +578,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
       <li class="project" data-sector="startup" style="--c:#2a2457;--fg:#ffffff">
         <a href="prepu.html" data-img="images/1715337608649-prepu_banner.png">
           <span class="project-name"><span class="pn" style="view-transition-name: t-prepu">PrepU</span><span class="project-line">An AI interview coach that turns interview anxiety into practice.</span></span>
-          <span class="project-meta"><span class="project-sector">Startup</span><span class="project-role">Founding Product Designer</span></span>
+          <span class="project-meta"><span class="project-sector">Startup</span><span class="project-role">Founder / Product Designer</span></span>
           <span class="project-thumb"><img src="images/1715337608649-prepu_banner.png" width="2500" height="733" alt="" loading="lazy"></span>
         </a>
       </li>
@@ -507,20 +587,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
           <span class="project-name"><span class="pn" style="view-transition-name: t-bp-castrol">BP Castrol</span><span class="project-line">A 2030 experience vision for Castrol’s business customers.</span></span>
           <span class="project-meta"><span class="project-sector">BP</span><span class="project-role">Lead Product Designer</span></span>
           <span class="project-thumb"><img src="images/1695726605992-bp_banner.png" width="1722" height="623" alt="" loading="lazy"></span>
-        </a>
-      </li>
-      <li class="project" data-sector="energy" style="--c:#c9cac9;--fg:#17191e">
-        <a href="bp-core.html" data-img="images/1695996286386-bpcore-sustainable-ds-high.png">
-          <span class="project-name"><span class="pn" style="view-transition-name: t-bp-core">BP Core</span><span class="project-line">A design system of 2,000+ components, built for people and the planet.</span></span>
-          <span class="project-meta"><span class="project-sector">BP</span><span class="project-role">Senior Product Designer</span></span>
-          <span class="project-thumb"><img src="images/1695996286386-bpcore-sustainable-ds-high.png" width="2500" height="900" alt="" loading="lazy"></span>
-        </a>
-      </li>
-      <li class="project" data-sector="finance" style="--c:#818f8c;--fg:#101413">
-        <a href="lbg.html" data-img="images/1687879457607-banner.jpg">
-          <span class="project-name"><span class="pn" style="view-transition-name: t-lbg">LBG mobile banking</span><span class="project-line">Simpler onboarding and a cleaner look for an existing banking app.</span></span>
-          <span class="project-meta"><span class="project-sector">Lloyds Banking Group</span><span class="project-role">Lead UI Designer</span></span>
-          <span class="project-thumb"><img src="images/1687879457607-banner.jpg" width="1782" height="713" alt="" loading="lazy"></span>
         </a>
       </li>
       <!-- hidden: older work --><li class="project" data-sector="telecom" hidden style="--c:#d5dddd;--fg:#17191e">
@@ -762,6 +828,35 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     });
     window.addEventListener('pointerup', function () { if (!down) return; down = false; s.classList.remove('dragging'); });
     s.addEventListener('click', function (e) { if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+  });
+
+  // Plinklet: a working copy of the device's goal screen. Add money and watch the jar fill.
+  document.querySelectorAll('.plk').forEach(function (el) {
+    var price = +el.dataset.price, start = +el.dataset.saved, saved = start, base = el.dataset.jar;
+    var scr = el.querySelector('.plk-screen'), s = el.querySelector('.plk-s');
+    var jar = el.querySelector('.plk-jar'), amt = el.querySelector('.plk-amt'), cheerEl = el.querySelector('.plk-cheer'), sent = el.querySelector('.plk-sent');
+    var adds = el.querySelectorAll('[data-add]'), sentTimer;
+    for (var i = 0; i <= 10; i++) { var im = new Image(); im.src = base + i + '.png'; }
+    function fit() { s.style.transform = 'scale(' + (scr.clientWidth / 320) + ')'; }
+    fit(); if ('ResizeObserver' in window) new ResizeObserver(fit).observe(scr); else window.addEventListener('resize', fit);
+    function cheer(c) { return c === 0 ? "LET'S GO!" : c <= 4 ? 'KEEP GOING!' : c === 5 ? 'HALFWAY!' : c <= 7 ? 'OVER HALFWAY!' : c <= 9 ? 'NEARLY THERE!' : 'YOU DID IT!'; }
+    function render() {
+      var c = Math.min(10, Math.floor(saved * 10 / price)), t = '£' + saved;
+      jar.src = base + c + '.png'; amt.textContent = t; amt.classList.toggle('sm', t.length > 4); cheerEl.textContent = cheer(c);
+      el.classList.toggle('done', saved >= price);
+      adds.forEach(function (b) { b.disabled = saved >= price; });
+    }
+    adds.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var n = +b.dataset.add; saved = Math.min(price, saved + n);
+        sent.textContent = b.dataset.from.toUpperCase() + ' SENT £' + n + '!'; sent.hidden = false;
+        sent.classList.remove('pop'); void sent.offsetWidth; sent.classList.add('pop');
+        clearTimeout(sentTimer); sentTimer = setTimeout(function () { sent.hidden = true; }, 1800);
+        render();
+      });
+    });
+    el.querySelector('[data-reset]').addEventListener('click', function () { saved = start; sent.hidden = true; render(); });
+    render();
   });
 
   // Lightbox for case-study images
