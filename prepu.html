@@ -532,6 +532,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .plk-hint { margin: 0; font-size: 13px; color: var(--muted); text-align: center; max-width: 44ch; }
 .plk-ctrl .plk-sound { background: transparent; color: var(--muted); border: 1.5px solid var(--line); }
 .plk-ctrl .plk-sound[aria-pressed="false"] { text-decoration: line-through; }
+
+/* Product tiles keep a fixed light ground in every theme, so cut-out artwork never sits on dark */
+.marquee img { background: #faf8f5; border-color: #e7e3dc; }
+.marquee.pixrow img { background: #fafbff; border-color: #e3e7f0; }
 </style>
 </head>
 <body>
