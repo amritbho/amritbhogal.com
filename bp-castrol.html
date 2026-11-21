@@ -536,6 +536,114 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* Product tiles keep a fixed light ground in every theme, so cut-out artwork never sits on dark */
 .marquee img { background: #faf8f5; border-color: #e7e3dc; }
 .marquee.pixrow img { background: #fafbff; border-color: #e3e7f0; }
+
+/* ---------- You Got This, Bro. ---------- */
+@font-face { font-family: "Anton"; src: url("images/ygtb/anton.woff2") format("woff2"); font-display: swap; }
+main.ygtb { --app-bg: #101010; --app-card: #252525; --app-text: #f4f2ed; --app-muted: #a6a6a0; --voice: "Anton", "Impact", "Arial Narrow", sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) main.ygtb { --c: #f4f2ed !important; --fg: #101010 !important; } }
+:root[data-theme="dark"] main.ygtb { --c: #f4f2ed !important; --fg: #101010 !important; }
+
+/* What the app refuses to ask for */
+.strike { margin: 40px 0 48px; }
+.strike ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .1em; font: 400 clamp(36px, 6.2vw, 76px)/1.05 var(--voice); text-transform: uppercase; color: var(--muted); }
+.strike s { text-decoration: none; position: relative; display: inline-block; }
+.strike s::after { content: ""; position: absolute; left: -.04em; right: -.04em; top: 50%; height: .085em; background: var(--ink); transform-origin: left center; }
+.strike-end { margin: .55em 0 0; font: 400 clamp(36px, 6.2vw, 76px)/1.05 var(--voice); text-transform: uppercase; color: var(--ink); max-width: 14ch; }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .strike s::after { animation: strike-draw linear both; animation-timeline: view(); animation-range: entry 60% cover 42%; }
+  }
+}
+@keyframes strike-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Phones in a row, with captions */
+.surfaces { margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); align-items: start; }
+.surfaces figure { margin: 0; display: grid; gap: 14px; }
+.surfaces img { width: 100%; max-width: 280px; height: auto; display: block; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .18)); }
+.surfaces figure:nth-child(2) { margin-top: clamp(0px, 4vw, 56px); }
+.surfaces figcaption { display: grid; gap: 4px; max-width: 30ch; }
+.surfaces figcaption b { font-size: 16px; }
+.surfaces figcaption span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+/* A message, taken apart */
+.anatomy { margin-top: 32px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.msg-card { background: #f4f2ed; color: #101010; border-radius: 26px; padding: clamp(24px, 3.4vw, 40px) clamp(20px, 3vw, 36px) clamp(24px, 3.4vw, 36px) 12px; display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 8px; row-gap: 18px; align-items: start; box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 24px 50px -30px rgba(0, 0, 0, .45); }
+:root[data-theme="dark"] .msg-card { box-shadow: none; }
+.mk { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 600 12px/1 var(--body); background: #101010; color: #f4f2ed; justify-self: center; margin-top: 2px; }
+.msg-card p { margin: 0; }
+.mc-theme { font: 600 12px/1.4 var(--body); letter-spacing: .12em; text-transform: uppercase; color: #55554f; padding-top: 4px; }
+.mc-line { font: 400 clamp(34px, 4.4vw, 54px)/1.02 var(--voice); text-transform: uppercase; letter-spacing: .005em; }
+.mc-support { font: 600 13px/1.45 var(--body); letter-spacing: .07em; text-transform: uppercase; color: #3d3d39; padding-top: 4px; }
+.mc-sign { display: flex; align-items: center; gap: 8px; font: 400 15px/1 var(--voice); text-transform: uppercase; letter-spacing: .02em; padding-top: 3px; }
+.mc-sign img { width: 22px; height: 22px; border-radius: 6px; }
+.anat-notes, .ann-notes { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; counter-reset: an; }
+.anat-notes li, .ann-notes li { counter-increment: an; display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 14px; row-gap: 3px; }
+.anat-notes li::before, .ann-notes li::before { content: counter(an); grid-row: span 2; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 600 12px/1 var(--body); background: var(--ink); color: var(--paper); margin-top: 1px; }
+.anat-notes b, .ann-notes b { font-size: 16px; }
+.anat-notes span, .ann-notes span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+/* Tone switcher and moments: a real message card from the app */
+.deck { margin-top: 28px; display: grid; gap: 16px; max-width: 640px; }
+.tone-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.tone-tabs button { text-align: left; display: grid; gap: 4px; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); background: var(--raised); color: var(--ink); font: inherit; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.tone-tabs button b { font-size: 15px; }
+.tone-tabs button span { font-size: 13px; line-height: 1.4; color: var(--muted); }
+.tone-tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.tone-tabs button[aria-selected="true"] span { color: inherit; opacity: .75; }
+.deck-card { background: var(--app-bg); color: var(--app-text); border-radius: 26px; padding: clamp(26px, 4vw, 40px) clamp(22px, 3.6vw, 36px); min-height: clamp(260px, 30vw, 320px); display: flex; flex-direction: column; gap: 14px; border: 1px solid #1f1f1f; }
+.deck-card p { margin: 0; }
+.dc-tag { font: 600 12px/1.4 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--app-muted); }
+.dc-tag span { color: var(--app-text); }
+.dc-line { font: 400 clamp(32px, 4.6vw, 52px)/1.03 var(--voice); text-transform: uppercase; letter-spacing: .005em; }
+.dc-support { font: 600 13px/1.5 var(--body); letter-spacing: .07em; text-transform: uppercase; color: var(--app-muted); max-width: 46ch; }
+.dc-sign { margin-top: auto !important; padding-top: 10px; font: 400 15px/1 var(--voice); text-transform: uppercase; letter-spacing: .02em; }
+.deck-card.swap > p { animation: deck-in .45s cubic-bezier(.2, .7, .2, 1) both; }
+.deck-card.swap > p:nth-child(2) { animation-delay: .04s; } .deck-card.swap > p:nth-child(3) { animation-delay: .08s; }
+@keyframes deck-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.deck-next { justify-self: end; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 16px; border: 0; background: var(--ink); color: var(--paper); font: 600 16px/1 var(--body); cursor: pointer; transition: transform .15s; }
+.deck-next:hover { transform: translateX(2px); }
+.mo-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.mo-chips button { min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); font: 500 14px/1 var(--body); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.mo-chips button:hover { border-color: var(--ink); }
+.mo-chips button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.tone-tabs button:focus-visible, .mo-chips button:focus-visible, .deck-next:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+
+/* Setup, step by step */
+.flow-wrap { margin-top: 32px; }
+.flow { list-style: none; margin: 0; padding: 0 0 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 2.4vw, 28px); counter-reset: fl; position: relative; }
+.flow::before { content: ""; position: absolute; left: 12px; right: 12px; top: 12px; height: 1px; background: var(--line); }
+.flow li { counter-increment: fl; display: grid; gap: 8px; align-content: start; position: relative; }
+.flow li::before { content: counter(fl); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 600 12px/1 var(--body); background: var(--ink); color: var(--paper); margin-bottom: 14px; position: relative; }
+.flow img { width: 100%; max-width: 240px; height: auto; display: block; margin-bottom: 8px; }
+.flow b { font-size: 16px; line-height: 1.35; }
+.flow span { color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+/* An annotated screen */
+.annotate { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.ann-shot { position: relative; }
+.ann-shot img { width: 100%; height: auto; display: block; }
+.pin { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; display: grid; place-items: center; font: 700 12px/1 var(--body); background: #ffd21f; color: #101010; box-shadow: 0 0 0 4px rgba(255, 210, 31, .28); transition: transform .2s, box-shadow .2s; }
+.pin.on { transform: scale(1.25); box-shadow: 0 0 0 7px rgba(255, 210, 31, .35); }
+.ann-notes li { cursor: default; border-radius: 10px; transition: opacity .2s; }
+.ann-notes.hovering li:not(.on) { opacity: .45; }
+.annotate + .surfaces { margin-top: clamp(48px, 7vw, 88px); }
+
+/* Rules every release keeps */
+.rules { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 56px); }
+.rules li { display: grid; gap: 8px; padding: 22px 0 26px; border-top: 2px solid var(--ink); align-content: start; }
+.rules b { font: 400 clamp(24px, 2.6vw, 32px)/1.08 var(--voice); text-transform: uppercase; letter-spacing: .01em; }
+.rules span { color: var(--muted); font-size: 15px; line-height: 1.55; max-width: 44ch; }
+
+@media (max-width: 900px) {
+  .anatomy, .annotate, .rules { grid-template-columns: minmax(0, 1fr); }
+  .ann-shot { max-width: 300px; }
+  .surfaces { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-right: calc(-1 * max(var(--gutter), env(safe-area-inset-right, 0px))); padding-right: var(--gutter); }
+  .surfaces figure { scroll-snap-align: start; } .surfaces figure:nth-child(2) { margin-top: 0; }
+  .flow { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; overflow-x: auto; scroll-snap-type: x mandatory; margin-right: calc(-1 * max(var(--gutter), env(safe-area-inset-right, 0px))); padding-right: var(--gutter); }
+  .flow li { scroll-snap-align: start; }
+  .tone-tabs { grid-template-columns: minmax(0, 1fr); }
+  .tone-tabs button { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+}
 </style>
 </head>
 <body>
@@ -626,8 +734,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     </div>
   </div>
 
-  <a class="next" href="plinklet.html" style="--c:#ffd447;--fg:#0b1f44">
-    <div class="wrap"><span>Next project</span><strong style="view-transition-name: t-plinklet">Plinklet</strong></div>
+  <a class="next" href="you-got-this-bro.html" style="--c:#101010;--fg:#f4f2ed">
+    <div class="wrap"><span>Next project</span><strong style="view-transition-name: t-you-got-this-bro">You Got This, Bro.</strong></div>
   </a>
 </main>
 
@@ -940,12 +1048,48 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     show();
   });
 
+  // You Got This, Bro.: tone switcher and moments swap a real message into the app's card
+  function swapCard(card, line, support, tag) {
+    card.querySelector('.dc-line').textContent = line;
+    card.querySelector('.dc-support').textContent = support;
+    if (tag !== undefined) card.querySelector('.dc-tag span').textContent = tag;
+    card.classList.remove('swap'); void card.offsetWidth; if (!reduce) card.classList.add('swap');
+  }
+  document.querySelectorAll('.deck.tones').forEach(function (d) {
+    var msgs = JSON.parse(d.dataset.msgs), tone = +d.dataset.i, pos = [0, 0, 0], card = d.querySelector('.deck-card');
+    var tabs = d.querySelectorAll('[role="tab"]');
+    function show() { var m = msgs[tone][pos[tone]]; swapCard(card, m[0], m[1]); }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { tone = i; tabs.forEach(function (x, k) { x.setAttribute('aria-selected', k === i ? 'true' : 'false'); }); show(); });
+      t.addEventListener('keydown', function (e) {
+        var n = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (n) { e.preventDefault(); var k = (i + n + tabs.length) % tabs.length; tabs[k].focus(); tabs[k].click(); }
+      });
+    });
+    d.querySelector('.deck-next').addEventListener('click', function () { pos[tone] = (pos[tone] + 1) % msgs[tone].length; show(); });
+  });
+  document.querySelectorAll('.deck.moments').forEach(function (d) {
+    var card = d.querySelector('.deck-card'), chips = d.querySelectorAll('.mo-chips button');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        chips.forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+        swapCard(card, c.dataset.line, c.dataset.support, c.dataset.tag);
+      });
+    });
+  });
+  // Annotated screen: pointing at a note lights up its pin, and the other way round
+  document.querySelectorAll('.annotate').forEach(function (a) {
+    var pins = a.querySelectorAll('.pin'), notes = a.querySelectorAll('.ann-notes li'), list = a.querySelector('.ann-notes');
+    function on(i) { list.classList.toggle('hovering', i >= 0); pins.forEach(function (p, k) { p.classList.toggle('on', k === i); }); notes.forEach(function (n, k) { n.classList.toggle('on', k === i); }); }
+    notes.forEach(function (n, i) { n.addEventListener('mouseenter', function () { on(i); }); n.addEventListener('mouseleave', function () { on(-1); }); });
+  });
+
   // Lightbox for case-study images
   var lb = document.querySelector('.lightbox');
   if (lb) {
     var lbImg = lb.querySelector('img'), lastFocus = null;
     function close() { lb.hidden = true; lbImg.removeAttribute('src'); if (lastFocus) lastFocus.focus(); }
-    document.querySelectorAll('.media img, .strip img').forEach(function (im) {
+    document.querySelectorAll('.media img, .strip img, .surfaces img, .flow img').forEach(function (im) {
       im.addEventListener('click', function () {
         lastFocus = document.activeElement; lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt; lb.hidden = false; lb.querySelector('.lb-close').focus();
       });
