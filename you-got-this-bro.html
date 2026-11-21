@@ -644,6 +644,20 @@ main.ygtb { --app-bg: #101010; --app-card: #252525; --app-text: #f4f2ed; --app-m
   .tone-tabs { grid-template-columns: minmax(0, 1fr); }
   .tone-tabs button { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 }
+
+/* Shipped: the App Store link, near the top and again at the end */
+.store-badge { display: inline-flex; border-radius: 9px; transition: transform .15s ease; }
+.store-badge:hover { transform: translateY(-2px); }
+.store-badge:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+.store-badge img { display: block; height: 48px; width: auto; }
+.shipped { margin: 28px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.shipped span { font-size: 15px; color: var(--muted); }
+.shipped span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2bb24c; margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 0 4px rgba(43, 178, 76, .18); }
+.ship { margin-top: 44px; padding: clamp(24px, 4vw, 40px); border-radius: 26px; background: var(--app-bg, #101010); color: var(--app-text, #f4f2ed); border: 1px solid #1f1f1f; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; }
+.ship p { margin: 0; display: grid; gap: 8px; max-width: 44ch; }
+.ship b { font: 400 clamp(40px, 6vw, 72px)/1 var(--voice, "Anton", sans-serif); text-transform: uppercase; letter-spacing: .01em; }
+.ship span { color: var(--app-muted, #a6a6a0); font-size: 16px; line-height: 1.5; }
+.ship .store-badge img { height: 54px; }
 </style>
 </head>
 <body>
@@ -666,10 +680,11 @@ main.ygtb { --app-bg: #101010; --app-card: #252525; --app-text: #f4f2ed; --app-m
     <p class="case-summary">A free daily encouragement app for men. Honest words on the Home Screen and Lock Screen, with no account, no streaks and no tracking.</p>
     <dl class="facts">
       <div><dt>Role</dt><dd>Founder / Product Designer</dd></div>
-      <div><dt>Stage</dt><dd>Coming soon to iPhone and Android</dd></div>
+      <div><dt>Stage</dt><dd>Live on the App Store</dd></div>
       <div><dt>Product</dt><dd>Mobile app with Home Screen and Lock Screen widgets</dd></div>
       <div><dt>Scope</dt><dd>Brand, writing, product, app and website</dd></div>
     </dl>
+    <p class="shipped"><a class="store-badge" href="https://apps.apple.com/app/id6836520445" target="_blank" rel="noopener"><img src="images/ygtb/app-store-badge.svg" alt="Download on the App Store"></a><span>Free on iPhone. Android is next.</span></p>
   </section>
 
   <div class="case-hero"><img src="images/ygtb/ygtb-hero.jpg" width="2400" height="1100" alt="You Got This, Bro. on three phones: a Home Screen widget, the Today screen and a Lock Screen widget"></div>
@@ -744,7 +759,8 @@ main.ygtb { --app-bg: #101010; --app-card: #252525; --app-text: #f4f2ed; --app-m
         <h2>Rules written into the code</h2>
         <p>For an app like this, trust is the product. Some decisions aren’t preferences, they’re rules that every release has to keep.</p>
         <ul class="rules"><li><b>No tracking.</b><span>No analytics or advertising code, no accounts. Nothing a person chooses or saves leaves the phone.</span></li><li><b>“Go easy” never shows a hard message.</b><span>Checked by an automated test, so a gentle setting can’t surprise someone on a bad day.</span></li><li><b>Support numbers are re-checked before every release.</b><span>The helplines on the Support screen, for England, have to be right every time.</span></li><li><b>Free, for good.</b><span>No subscriptions, no adverts, no paywalls. Encouragement shouldn’t come with a price tag.</span></li></ul>
-        <p class="note">You Got This, Bro. offers encouragement and general wellbeing support. It isn’t a substitute for professional care, and the app says so. Coming soon to iPhone and Android; the Android Home Screen widget is next.</p>
+        <p class="note">You Got This, Bro. offers encouragement and general wellbeing support. It isn’t a substitute for professional care, and the app says so.</p>
+        <div class="ship"><p><b>Shipped.</b><span>Live on the App Store and free on iPhone. Android, with its Home Screen widget, is next.</span></p><a class="store-badge" href="https://apps.apple.com/app/id6836520445" target="_blank" rel="noopener"><img src="images/ygtb/app-store-badge.svg" alt="Download on the App Store"></a></div>
       </section>
 
     </div>
