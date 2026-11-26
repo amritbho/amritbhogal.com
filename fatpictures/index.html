@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Fat Pictures — Film and drama development, London</title>
+<meta name="description" content="Fat Pictures is a London development and production company. Thrillers of all stripes, from a writer's first draft to a fully packaged project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0a09;
+    --bg-2: #12110f;
+    --raised: #1c1a18;
+    --line: rgba(239, 233, 222, 0.1);
+    --text: #efe9de;
+    --text-2: #aaa398;
+    --muted: #8a847a;
+    --red: #d7262b;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --pad: clamp(20px, 4vw, 64px);
+    --display: "Anton", "Impact", sans-serif;
+    --sans: "Instrument Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font: 400 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--red); color: #fff; }
+  :focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+
+  /* ---------- Nav ---------- */
+  .nav { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 var(--pad); transition: background-color 300ms var(--ease), border-color 300ms var(--ease); border-bottom: 1px solid transparent; }
+  .nav.is-solid { background: rgba(11, 10, 9, 0.92); border-color: var(--line); backdrop-filter: blur(8px); }
+  .brand { display: flex; align-items: center; gap: 12px; font: 400 22px/1 var(--display); text-transform: uppercase; letter-spacing: 0.01em; }
+  .nav-links { display: flex; align-items: center; gap: 32px; font-size: 14px; }
+  .nav-links a { color: var(--text-2); transition: color 150ms var(--ease); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links .btn { color: var(--text); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 40px; padding: 0 18px; border-radius: 8px; border: 1px solid rgba(239,233,222,0.24); font: 500 14px/1 var(--sans); transition: background-color 150ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease), transform 120ms var(--ease); }
+  .btn:hover { background: var(--text); color: var(--bg) !important; border-color: var(--text); }
+  .btn:active { transform: scale(0.98); }
+  .btn-red { background: var(--red); border-color: var(--red); color: #fff; height: 48px; padding: 0 22px; font-size: 15px; }
+  .btn-red:hover { background: #fff; border-color: #fff; color: var(--bg); }
+  .menu-btn { display: none; background: none; border: 0; color: var(--text); font: 500 14px var(--sans); cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; display: flex; align-items: flex-end; }
+  .hero-img { position: absolute; inset: 0; }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; transform: scale(1.08); transition: transform 2400ms var(--ease); filter: grayscale(0.15) contrast(1.05); }
+  .is-loaded .hero-img img { transform: scale(1); }
+  .hero-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,10,9,0.55) 0%, rgba(11,10,9,0) 22%, rgba(11,10,9,0) 45%, rgba(11,10,9,0.92) 88%, var(--bg) 100%); }
+  .hero-inner { position: relative; width: 100%; padding: 0 var(--pad) 48px; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 48px; }
+  .hero h1 { font: 400 clamp(56px, 8.4vw, 160px)/0.9 var(--display); text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; }
+  .hero-side .btn { justify-self: start; }
+  .hero h1 .red { color: var(--red); }
+  .hero-side { max-width: 320px; padding-bottom: 12px; display: grid; gap: 24px; }
+  .hero-side p { color: var(--text-2); font-size: 16px; line-height: 1.55; }
+  .hero-caption { font: 400 12px/16px var(--mono); color: var(--muted); display: flex; gap: 12px; }
+  .hero-caption span:first-child { color: var(--red); }
+  .reveal-line { display: block; overflow: hidden; }
+  .reveal-line > span { display: block; transform: translateY(105%); transition: transform 1000ms var(--ease); }
+  .is-loaded .reveal-line > span { transform: none; }
+  .is-loaded .reveal-line:nth-child(2) > span { transition-delay: 80ms; }
+  .is-loaded .reveal-line:nth-child(3) > span { transition-delay: 160ms; }
+
+  /* ---------- Statement ---------- */
+  .statement { padding: 160px var(--pad) 128px; display: grid; grid-template-columns: 1fr 2fr; gap: 48px; border-bottom: 1px solid var(--line); }
+  .label { font: 400 12px/16px var(--mono); color: var(--muted); }
+  .label b { color: var(--red); font-weight: 400; }
+  .statement p { font: 400 clamp(28px, 3.4vw, 52px)/1.12 var(--sans); letter-spacing: -0.02em; max-width: 22ch; }
+  .statement p em { font-style: normal; color: var(--text-2); }
+
+  /* ---------- Reel (film strip slate) ---------- */
+  .reel { position: relative; }
+  .reel-stage { position: sticky; top: 0; height: 100svh; min-height: 640px; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; padding: 104px 0 40px; }
+  .reel-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 var(--pad); }
+  .reel-head h2 { font: 400 clamp(40px, 5vw, 80px)/1 var(--display); text-transform: uppercase; }
+  .reel-count { font: 400 12px/16px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .reel-count b { color: var(--red); font-weight: 400; }
+  .reel-window { align-self: center; overflow: hidden; }
+  .strip { --fh: min(46svh, 52vw); --fw: calc(var(--fh) * 1.5); display: flex; width: max-content; background: #171512; will-change: transform; padding: 0 calc(50vw - var(--fw) / 2); }
+  .strip-unit { flex: none; display: flex; flex-direction: column; }
+  .sprockets { height: 32px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect x='8' y='9' width='16' height='14' rx='3' fill='%230b0a09'/%3E%3C/svg%3E"); background-size: 32px 32px; background-repeat: repeat-x; position: relative; }
+  .edge { height: 20px; padding: 0 14px; font: 500 10px/20px var(--mono); color: #8a847a; white-space: nowrap; overflow: hidden; display: flex; justify-content: space-between; }
+  .frame { width: var(--fw); height: var(--fh); margin: 0 10px; position: relative; overflow: hidden; display: block; background: var(--bg); border-radius: 2px; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05) brightness(0.7); transform: scale(1.04); transition: filter 600ms var(--ease), transform 900ms var(--ease); }
+  .frame.on img { filter: none; transform: scale(1); }
+  .frame:hover img { filter: none; }
+  .frame-n { position: absolute; top: 12px; left: 14px; font: 400 12px/16px var(--mono); color: var(--text); opacity: 0.85; }
+  .leader { width: calc(var(--fw) * 0.75); height: var(--fh); margin: 0 10px; display: grid; place-items: center; text-align: center; font: 400 12px/18px var(--mono); color: var(--muted); border: 1px dashed rgba(239,233,222,0.14); border-radius: 2px; }
+  .leader strong { display: block; font: 400 40px/1 var(--display); color: var(--text-2); text-transform: uppercase; margin-bottom: 8px; }
+  .reel-readout { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px; padding: 0 var(--pad); }
+  .readout-title { font: 400 clamp(48px, 7.2vw, 132px)/0.9 var(--display); text-transform: uppercase; transition: opacity 180ms var(--ease), transform 180ms var(--ease); }
+  .readout-meta { text-align: right; font-size: 14px; color: var(--text-2); display: grid; gap: 4px; padding-bottom: 8px; transition: opacity 180ms var(--ease); }
+  .readout-meta a { color: var(--text); margin-top: 12px; }
+  .readout-meta a:hover { color: var(--red); }
+  .is-swapping .readout-title { opacity: 0; transform: translateY(8px); }
+  .is-swapping .readout-meta { opacity: 0; }
+
+  /* ---------- Spreads ---------- */
+  .slate { border-top: 1px solid var(--line); }
+  .spread { position: relative; min-height: 100svh; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: 128px var(--pad); align-items: center; border-bottom: 1px solid var(--line); }
+  .spread-img { grid-column: 1 / span 7; position: relative; overflow: hidden; aspect-ratio: 4/5; max-height: 86svh; width: 100%; clip-path: inset(100% 0 0 0); transition: clip-path 1200ms var(--ease); }
+  .spread-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); transition: transform 1800ms var(--ease); }
+  .spread.in .spread-img { clip-path: inset(0 0 0 0); }
+  .spread.in .spread-img img { transform: scale(1); }
+  .spread-body { grid-column: 8 / span 5; position: relative; z-index: 2; }
+  .spread.flip .spread-img { grid-column: 6 / span 7; grid-row: 1; }
+  .spread.flip .spread-body { grid-column: 1 / span 5; grid-row: 1; }
+  .spread h3 { font: 400 clamp(64px, 9vw, 168px)/0.86 var(--display); text-transform: uppercase; letter-spacing: -0.005em; margin-left: -18%; }
+  .spread.flip h3 { margin-left: 0; margin-right: -18%; }
+  .tagline { font: 400 clamp(18px, 1.6vw, 22px)/1.35 var(--sans); color: var(--text); margin-top: 24px; max-width: 26ch; }
+  .logline { color: var(--text-2); font-size: 16px; line-height: 1.6; margin-top: 20px; max-width: 44ch; }
+  .fade { opacity: 0; transform: translateY(12px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+  .spread.in .fade { opacity: 1; transform: none; }
+  .spread.in .fade:nth-child(2) { transition-delay: 300ms; }
+  .spread.in .fade:nth-child(3) { transition-delay: 360ms; }
+  .spread.in .fade:nth-child(4) { transition-delay: 420ms; }
+  .spread.in .fade:nth-child(5) { transition-delay: 480ms; }
+  .spread.in .fade:first-child { transition-delay: 240ms; }
+
+  /* Full-bleed spread */
+  .spread.bleed { display: block; padding: 0; min-height: 100svh; overflow: hidden; }
+  .spread.bleed .spread-img { position: absolute; inset: 0; aspect-ratio: auto; max-height: none; height: 100%; }
+  .spread.bleed .spread-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,10,9,0.9) 0%, rgba(11,10,9,0.55) 40%, rgba(11,10,9,0) 70%); }
+  .spread.bleed .spread-body { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 128px var(--pad); max-width: 760px; }
+  .spread.bleed h3 { margin: 0; }
+
+  /* Signature: clapperboard */
+  .clapper { margin-top: 40px; max-width: 460px; border: 1px solid rgba(239,233,222,0.22); border-radius: 4px; overflow: hidden; font-family: var(--mono); }
+  .clapper-sticks { height: 16px; background: repeating-linear-gradient(-45deg, var(--text) 0 14px, var(--bg) 14px 28px); opacity: 0.9; }
+  .clapper-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .clapper-cell { padding: 12px 16px 14px; border-top: 1px solid rgba(239,233,222,0.22); }
+  .clapper-cell:nth-child(odd) { border-right: 1px solid rgba(239,233,222,0.22); }
+  .clapper-cell.wide { grid-column: 1 / -1; border-right: 0; }
+  .clapper-cell dt { font-size: 11px; line-height: 16px; color: var(--muted); }
+  .clapper-cell dd { font-size: 14px; line-height: 20px; color: var(--text); margin-top: 4px; }
+  .clapper-cell.no dd { color: var(--red); font-size: 20px; line-height: 24px; }
+
+  /* ---------- About ---------- */
+  .about { padding: 160px var(--pad); display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+  .about-head { grid-column: 1 / span 5; }
+  .about-head h2 { font: 400 clamp(56px, 7vw, 128px)/0.88 var(--display); text-transform: uppercase; margin-top: 24px; }
+  .about-body { grid-column: 7 / span 6; display: grid; gap: 64px; }
+  .about-body > p { font-size: clamp(20px, 1.7vw, 24px); line-height: 1.45; color: var(--text); }
+  .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; border-top: 1px solid var(--line); padding-top: 32px; }
+  .services h4 { font: 500 15px/1.3 var(--sans); margin: 12px 0 8px; }
+  .services p { font-size: 14px; line-height: 1.55; color: var(--text-2); }
+
+  /* ---------- Contact ---------- */
+  .contact { position: relative; padding: 128px var(--pad) 40px; border-top: 1px solid var(--line); overflow: hidden; }
+  .contact-big { display: block; font: 400 clamp(48px, 10.4vw, 200px)/0.9 var(--display); text-transform: uppercase; margin: 24px 0 96px; transition: color 180ms var(--ease); word-break: break-word; }
+  .contact-big:hover { color: var(--red); }
+  .contact-grid { display: grid; grid-template-columns: 120px 1fr 1fr 1fr; gap: 32px; align-items: start; padding-top: 32px; border-top: 1px solid var(--line); }
+  .contact-grid img { width: 120px; height: 120px; object-fit: cover; border-radius: 4px; }
+  .contact-grid h5 { font: 400 12px/16px var(--mono); color: var(--muted); margin-bottom: 12px; }
+  .contact-grid p, .contact-grid li { font-size: 14px; line-height: 1.6; color: var(--text-2); list-style: none; }
+  .contact-grid a:hover { color: var(--text); }
+  .foot { display: flex; justify-content: space-between; margin-top: 96px; font: 400 12px/16px var(--mono); color: var(--muted); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1100px) {
+  }
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .nav.open .nav-links { display: flex; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px var(--pad) 32px; background: var(--bg); border-bottom: 1px solid var(--line); font-size: 18px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 24px; padding-bottom: 32px; }
+    .hero h1 { font-size: clamp(48px, 14vw, 88px); }
+    .statement { grid-template-columns: 1fr; padding: 96px var(--pad) 80px; gap: 24px; }
+    .reel-stage { position: relative; height: auto; min-height: 0; padding: 80px 0 64px; gap: 32px; }
+    .reel-window { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .reel-window::-webkit-scrollbar { display: none; }
+    .strip { --fh: 52vw; transform: none !important; }
+    .frame { scroll-snap-align: center; }
+    .reel-readout { grid-template-columns: 1fr; gap: 12px; }
+    .readout-title { font-size: clamp(44px, 13vw, 72px); }
+    .readout-meta { text-align: left; }
+    .spread, .spread.flip { display: flex; flex-direction: column; align-items: stretch; padding: 80px var(--pad); min-height: 0; gap: 32px; }
+    .spread-img { aspect-ratio: 4/5; max-height: none; }
+    .spread h3, .spread.flip h3 { margin: 0; font-size: clamp(56px, 16vw, 96px); }
+    .spread.bleed .spread-body { padding: 96px var(--pad); justify-content: flex-end; }
+    .spread.bleed .spread-img::after { background: linear-gradient(0deg, rgba(11,10,9,0.95) 0%, rgba(11,10,9,0.6) 50%, rgba(11,10,9,0.1) 100%); }
+    .about { grid-template-columns: 1fr; padding: 96px var(--pad); gap: 40px; }
+    .about-head, .about-body { grid-column: 1; }
+    .services { grid-template-columns: 1fr; gap: 24px; }
+    .contact { padding-top: 96px; }
+    .contact-big { font-size: clamp(32px, 11vw, 64px); margin: 16px 0 64px; }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid img { grid-column: 1 / -1; width: 80px; height: 80px; }
+    .foot { flex-direction: column; gap: 8px; margin-top: 64px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 1ms !important; transition-delay: 0ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Fat Pictures, home">Fat Pictures</a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#slate">Slate</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a class="btn" href="mailto:info@fatpictures.co.uk">Get in touch</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Fat Pictures">
+    <div class="hero-img"><img src="img/guilty-wide.jpg" alt="Still from Guilty: a woman's face framed by shattered glass" fetchpriority="high"></div>
+    <div class="hero-inner">
+      <h1>
+        <span class="reveal-line"><span>The fatter,</span></span>
+        <span class="reveal-line"><span>the better, the</span></span>
+        <span class="reveal-line"><span><span class="red">more beautiful</span></span></span>
+      </h1>
+      <div class="hero-side fade-in">
+        <p>A London development and production company. Thrillers of all stripes, for cinema and high-end drama.</p>
+        <a class="btn btn-red" href="#slate">See the slate</a>
+        <div class="hero-caption"><span>01 / 08</span><span>Guilty, dark comedy thriller</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statement -->
+  <section class="statement">
+    <div class="label"><b>●</b>&nbsp; What we do</div>
+    <p>We take new writers from embryonic idea to fully packaged project, <em>with high-profile directors and world-class talent attached.</em></p>
+  </section>
+
+  <!-- Slate as a strip of film -->
+  <section class="reel" id="slate" aria-label="The slate">
+    <div class="reel-stage">
+      <div class="reel-head">
+        <h2>The slate</h2>
+        <span class="reel-count" aria-live="polite"><b id="reelNow">01</b> / 08 &nbsp;in development</span>
+      </div>
+      <div class="reel-window" id="reelWindow"><div class="strip" id="strip"></div></div>
+      <div class="reel-readout" id="readout">
+        <div class="readout-title" id="readTitle">Guilty</div>
+        <div class="readout-meta"><span id="readGenre"></span><span id="readCredit"></span><a id="readLink" href="#guilty">Open the project &rarr;</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spreads -->
+  <section class="slate" id="spreads" aria-label="Projects"></section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="about-head">
+      <div class="label"><b>●</b>&nbsp; About</div>
+      <h2>Made in London. Built to travel</h2>
+    </div>
+    <div class="about-body">
+      <p>Fat Pictures is a development and production company based in London. Our slate is mainly feature films, with high-end drama series alongside. Thrillers of all stripes are our preferred genre, though the current slate also holds a high-concept comedy, an elevated psychological drama and a contained sci-fi.</p>
+      <div class="services">
+        <div>
+          <span class="label">01</span>
+          <h4>Development</h4>
+          <p>We work with new writers and build projects from the first idea to a fully packaged film or series.</p>
+        </div>
+        <div>
+          <span class="label">02</span>
+          <h4>Co-production</h4>
+          <p>We act as co-producers or partners on international productions.</p>
+        </div>
+        <div>
+          <span class="label">03</span>
+          <h4>Finance strategy</h4>
+          <p>We advise on financing for the current market, using tax credits and sourcing equity investment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="label"><b>●</b>&nbsp; Contact</div>
+    <a class="contact-big" href="mailto:info@fatpictures.co.uk">info@<br>fatpictures.co.uk</a>
+    <div class="contact-grid">
+      <img src="img/fat-logo.jpg" alt="Fat Pictures logo">
+      <div>
+        <h5>Registered office</h5>
+        <p>Regina House<br>124 Finchley Road<br>London NW3 5JS</p>
+      </div>
+      <div>
+        <h5>Industry news</h5>
+        <ul>
+          <li><a href="https://www.screendaily.com/news" target="_blank" rel="noopener">Screen Daily</a></li>
+          <li><a href="https://deadline.com/" target="_blank" rel="noopener">Deadline</a></li>
+          <li><a href="https://variety.com/v/film/news/" target="_blank" rel="noopener">Variety</a></li>
+          <li><a href="https://www.hollywoodreporter.com/" target="_blank" rel="noopener">The Hollywood Reporter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Slate</h5>
+        <ul id="footSlate"></ul>
+      </div>
+    </div>
+    <div class="foot">
+      <span>© 2026 Fat Pictures</span>
+      <span>The fatter, the better, the more beautiful</span>
+    </div>
+  </section>
+</main>
+
+<script>
+  const projects = [
+    { id: "guilty", title: "Guilty", img: "img/guilty.jpg", pos: "50% 20%", genre: "Dark comedy thriller",
+      tagline: "Sometimes remembering is murder",
+      logline: "Struggling with memory loss after being carjacked and accused of manslaughter, a Boston executive receives disturbing flashbacks from her childhood. Returning to her hometown to confront the past, she comes up against the local cop, intent on framing her as a cold-hearted killer.",
+      credits: [["Written by", "Claire Duffy"]] },
+    { id: "nightshade", title: "Nightshade", img: "img/nightshade.jpg", pos: "50% 50%", genre: "Sci-fi thriller", layout: "bleed",
+      tagline: "Who can you trust this far from home?",
+      logline: "On a frozen moon of Jupiter, a married couple conduct vitally important scientific research. When a colleague from a nearby moon crash lands unexpectedly, circumstances get out of control that threaten not only their survival but that of the entire human race.",
+      credits: [["Directed by", "Paul Franklin"], ["Written by", "Phyllis Heltay"]] },
+    { id: "contained", title: "Contained", img: "img/contained.jpg", pos: "40% 30%", genre: "Conspiracy thriller",
+      tagline: "What they started she will now end",
+      logline: "Following a terrifying knife attack, a young Lithuanian lawyer goes to London to find her missing sister. Discovering her involvement with a duplicitous city financier, she recruits a renegade blogger to blow open a trafficking and toxic waste scandal with far-reaching and deadly consequences.",
+      credits: [["Written by", "David Kew"]] },
+    { id: "diamond-life", title: "Diamond Life", img: "img/diamond-life.jpg", pos: "50% 30%", genre: "Black comedy",
+      tagline: "Empire on acid. Euphoria for the never grown-ups",
+      logline: "The Truman Show for the social media age, and Billions with a side order of glitz.",
+      credits: [["Writer and showrunner", "Claire Duffy"]] },
+    { id: "fact-checker", title: "The Fact Checker", img: "img/fact-checker.jpg", pos: "50% 50%", genre: "Psychological thriller", layout: "bleed",
+      tagline: "Her facts were stranger than fiction",
+      logline: "A young widow moves in with a famous true crime writer while they collaborate on a book to clear her husband's name. When the author goes abroad to write, his fact checker shows up and events spiral out of control, with devastating and murderous consequences.",
+      credits: [["Written by", "Guy Fee"]] },
+    { id: "idealists", title: "Idealists", img: "img/idealists.jpg", pos: "50% 40%", genre: "Reunion crime thriller",
+      tagline: "They wanted to save the world. Now they must save themselves",
+      logline: "A group of university friends are forced to confront their past when a funeral descends into blackmail and murder.",
+      credits: [["Directed by", "Jon Amiel"], ["Written by", "Mark Heywood"]] },
+    { id: "unspoken", title: "Unspoken", img: "img/unspoken.jpg", pos: "50% 60%", genre: "Dark thriller",
+      tagline: "",
+      logline: "Haunted by questions from the past, a classics lecturer searches for his missing wife on the Greek island where they first met, only to discover the truth behind the deadly secrets they tried to leave behind.",
+      credits: [["Written by", "Paddy Fletcher, Mark Heywood"], ["Produced by", "Neil Thompson"]] },
+    { id: "naked-truth", title: "The Naked Truth", img: "img/naked-truth.jpg", pos: "50% 30%", genre: "Comedy",
+      tagline: "Love laid bare",
+      logline: "An aspiring journalist falls for the receptionist while working undercover at an online gossip sheet. When she becomes the target of a salacious front-page exposé by his desperate new boss, he torpedoes his career, exposes tabloid corruption and organises a marathon for emphysema sufferers, all in his riotous attempts to win her back.",
+      credits: [["Written by", "Danny King, Christina Pickworth"]] },
+  ];
+
+  const pad = n => String(n).padStart(2, "0");
+  const writer = p => (p.credits.find(c => /Writ/.test(c[0])) || ["", ""])[1];
+
+  // Film strip
+  const strip = document.getElementById("strip");
+  const sprk = (pos, l, r) => {
+    const holes = `<div class="sprockets" aria-hidden="true"></div>`, edge = `<div class="edge" aria-hidden="true"><span>${l}</span><span>${r}</span></div>`;
+    return pos === "top" ? holes + edge : edge + holes;
+  };
+  const leader = (word, note) => `<div class="strip-unit">${sprk("top", "FAT PICTURES", "")}<div class="leader"><div><strong>${word}</strong>${note}</div></div>${sprk("bot", "", "")}</div>`;
+  strip.innerHTML = leader("Head", "Fat Pictures<br>Slate · 8 reels") + projects.map((p, i) => `
+    <div class="strip-unit">
+      ${sprk("top", `FP ▸ ${pad(i + 1)}`, p.title.toUpperCase())}
+      <a class="frame" href="#${p.id}" data-i="${i}" aria-label="${p.title}"><img src="${p.img}" alt="" loading="lazy" style="object-position:${p.pos}"><span class="frame-n">${pad(i + 1)}</span></a>
+      ${sprk("bot", p.genre.toUpperCase(), `${pad(i + 1)}A`)}
+    </div>`).join("") + leader("Tail", "End of slate");
+
+  document.getElementById("footSlate").innerHTML = projects.map(p => `<li><a href="#${p.id}">${p.title}</a></li>`).join("");
+
+  // Spreads
+  let flip = false;
+  document.getElementById("spreads").innerHTML = projects.map((p, i) => {
+    const bleed = p.layout === "bleed";
+    const cls = bleed ? "bleed" : (flip = !flip, flip ? "" : "flip");
+    const cells = [
+      `<div class="clapper-cell no"><dt>No.</dt><dd>${pad(i + 1)}</dd></div>`,
+      `<div class="clapper-cell"><dt>Genre</dt><dd>${p.genre}</dd></div>`,
+      ...p.credits.map(([k, v], j, arr) => `<div class="clapper-cell${arr.length === 1 || (arr.length % 2 === 1 && j === arr.length - 1) ? " wide" : ""}"><dt>${k}</dt><dd>${v}</dd></div>`)
+    ].join("");
+    return `
+    <article class="spread ${cls}" id="${p.id}">
+      <div class="spread-img"><img src="${p.img}" alt="Key art for ${p.title}" loading="lazy" style="object-position:${p.pos}"></div>
+      <div class="spread-body">
+        <h3 class="fade">${p.title}</h3>
+        ${p.tagline ? `<p class="tagline fade">${p.tagline}</p>` : ""}
+        <p class="logline fade">${p.logline}</p>
+        <dl class="clapper fade"><div class="clapper-sticks" aria-hidden="true"></div><div class="clapper-grid">${cells}</div></dl>
+      </div>
+    </article>`;
+  }).join("");
+
+  // Load reveal
+  requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+
+  // Spread reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.18 });
+  document.querySelectorAll(".spread").forEach(s => io.observe(s));
+
+  // Nav background after hero
+  const nav = document.getElementById("nav");
+  const onScroll = () => nav.classList.toggle("is-solid", window.scrollY > window.innerHeight * 0.7);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // Mobile menu
+  const menuBtn = document.getElementById("menuBtn");
+  menuBtn.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    menuBtn.setAttribute("aria-expanded", open);
+    menuBtn.textContent = open ? "Close" : "Menu";
+  });
+  document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", () => { nav.classList.remove("open"); menuBtn.textContent = "Menu"; menuBtn.setAttribute("aria-expanded", false); }));
+
+  // Reel: vertical scroll drives the strip sideways (desktop), swipe on mobile
+  const reel = document.getElementById("slate"), reelWin = document.getElementById("reelWindow");
+  const frames = [...strip.querySelectorAll(".frame")];
+  const readout = document.getElementById("readout");
+  const mq = matchMedia("(max-width: 860px)");
+  let current = -1, dist = 0;
+  const setActive = i => {
+    if (i === current) return;
+    current = i;
+    frames.forEach((f, j) => f.classList.toggle("on", j === i));
+    const p = projects[i];
+    document.getElementById("reelNow").textContent = pad(i + 1);
+    readout.classList.add("is-swapping");
+    clearTimeout(setActive.t);
+    setActive.t = setTimeout(() => {
+      document.getElementById("readTitle").textContent = p.title;
+      document.getElementById("readGenre").textContent = p.genre;
+      document.getElementById("readCredit").textContent = p.credits.map(c => `${c[0]} ${c[1]}`).join(" · ");
+      document.getElementById("readLink").href = "#" + p.id;
+      readout.classList.remove("is-swapping");
+    }, 180);
+  };
+  const nearestToCentre = () => {
+    const c = innerWidth / 2; let best = 0, bd = Infinity;
+    frames.forEach((f, j) => { const r = f.getBoundingClientRect(); const d = Math.abs(r.left + r.width / 2 - c); if (d < bd) { bd = d; best = j; } });
+    setActive(best);
+  };
+  const sizeReel = () => {
+    if (mq.matches) { reel.style.height = ""; strip.style.transform = ""; return; }
+    dist = strip.scrollWidth - innerWidth;
+    reel.style.height = `${innerHeight + dist}px`;
+    driveReel();
+  };
+  const driveReel = () => {
+    if (mq.matches) return;
+    const top = reel.getBoundingClientRect().top;
+    const prog = Math.min(1, Math.max(0, -top / dist));
+    strip.style.transform = `translate3d(${-prog * dist}px, 0, 0)`;
+    nearestToCentre();
+  };
+  addEventListener("scroll", driveReel, { passive: true });
+  addEventListener("resize", sizeReel);
+  reelWin.addEventListener("scroll", nearestToCentre, { passive: true });
+  addEventListener("load", sizeReel);
+  sizeReel(); setActive(0);
+</script>
+</body>
+</html>
